@@ -25,11 +25,6 @@ public partial class StoregameContext : DbContext
 
     public virtual DbSet<Transaction> Transactions { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.UseNpgsql(
-            "Host=localhost;Database=storegame;Username=postgres;Password=index"
-        );
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

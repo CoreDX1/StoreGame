@@ -6,6 +6,12 @@
     <ProjectReference Include="..\Store.Utilities\Store.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commnos\" />
+    <Folder Include="Commnos\Base\" />
+    <Folder Include="DTO\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
