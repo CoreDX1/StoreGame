@@ -4,5 +4,5 @@ namespace Store.Application.Interface;
 
 public interface IGameApplication
 {
-    public Task<IEnumerable<GameDto>> ListGames();
+    public Task<IEnumerable<GameDto>> GetGameList();
 }

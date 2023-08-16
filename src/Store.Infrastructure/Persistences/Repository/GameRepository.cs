@@ -7,29 +7,29 @@ namespace Store.Infrastructure.Persistences.Repository;
 
 public class GameRepository : IGameRepository
 {
-    private readonly StoregameContext _context;
+    private readonly StoregameContext _dbContext;
 
-    public GameRepository(StoregameContext context)
+    public GameRepository(StoregameContext dbContext)
     {
-        _context = context;
+        _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<GameDto>> ListGames()
+    public async Task<IEnumerable<GameDto>> GetListOfGamesAsync()
     {
-        var game = await _context.Games
+        var gameList = await _dbContext.Games
             .Select(
-                g =>
+                gameEntity =>
                     new GameDto
                     {
-                        Title = g.Title,
-                        DeveloperName = g.Developer!.Name,
-                        PlatformName = g.Platform!.Name,
-                        ReleaseDate = g.ReleaseDate,
-                        Price = g.Price,
-                        Stock = g.Stock,
+                        Title = gameEntity.Title,
+                        DeveloperName = gameEntity.Developer!.Name,
+                        PlatformName = gameEntity.Platform!.Name,
+                        ReleaseDate = gameEntity.ReleaseDate,
+                        Price = gameEntity.Price,
+                        Stock = gameEntity.Stock,
                     }
             )
             .ToListAsync();
-        return game;
+        return gameList;
     }
 }

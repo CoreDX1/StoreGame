@@ -14,9 +14,9 @@ public class GameApplication : IGameApplication
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<IEnumerable<GameDto>> ListGames()
+    public async Task<IEnumerable<GameDto>> GetGameList()
     {
-        var response = await _unitOfWork.Game.ListGames();
+        var response = await _unitOfWork.Game.GetListOfGamesAsync();
         return response;
     }
 }
