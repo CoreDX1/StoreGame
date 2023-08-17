@@ -3,6 +3,8 @@ using Store.Application.Interface;
 
 namespace Store.Api.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class GameController : ControllerBase
 {
     private readonly IGameApplication _gameApplication;
@@ -12,10 +14,15 @@ public class GameController : ControllerBase
         _gameApplication = gameApplication;
     }
 
-    [HttpGet("/GameList")]
+    /// <summary>
+    /// Llama a la tabla Game
+    /// </summary>
+    /// <returns>Una accion de que devuelve la lista de juegos</returns>
+    [HttpGet]
+    [Route("List")]
     public async Task<IActionResult> GameList()
     {
-        var response = await _gameApplication.ListGames();
+        var response = await _gameApplication.GetGameList();
         return Ok(response);
     }
 }

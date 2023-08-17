@@ -1,14 +1,16 @@
-﻿namespace Store.Infrastructure.Persistences.Interfaces;
+﻿using Store.Infrastructure.Persistences.Repository;
+
+namespace Store.Infrastructure.Persistences.Interfaces;
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly StoregameContext _context;
-    public IGameRepository Game { get; }
+    public IGameRepository Game { get; private set; }
 
     public UnitOfWork(StoregameContext context, IGameRepository game)
     {
         _context = context;
-        Game = game;
+        Game = new GameRepository(_context);
     }
 
     public void Dispose()

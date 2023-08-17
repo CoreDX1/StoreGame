@@ -1,5 +1,4 @@
 ﻿using Store.Application.Interface;
-using Store.Domain.Entities;
 using Store.Infrastructure.Persistences.Interfaces;
 using Store.Infrastructure.Persistences.Repository;
 
@@ -16,7 +15,7 @@ public class GameApplication : IGameApplication
 
     public async Task<IEnumerable<GameDto>> GetGameList()
     {
-        var response = await _unitOfWork.Game.GetListOfGamesAsync();
+        var response = await _unitOfWork.Game.GetAll();
         return response;
     }
 }

@@ -1,22 +1,21 @@
 using Microsoft.EntityFrameworkCore;
-using Store.Domain.Entities;
-using Store.Infrastructure;
 using Store.Infrastructure.Persistences.Interfaces;
 
 namespace Store.Infrastructure.Persistences.Repository;
 
-public class GameRepository : IGameRepository
+public class GameRepository : RepositoyBase<GameDto>, IGameRepository
 {
     private readonly StoregameContext _dbContext;
 
     public GameRepository(StoregameContext dbContext)
+        : base(dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<GameDto>> GetListOfGamesAsync()
+    public override async Task<IEnumerable<GameDto>> GetAll()
     {
-        var gameList = await _dbContext.Games
+        return await _dbContext.Games
             .Select(
                 gameEntity =>
                     new GameDto
@@ -24,12 +23,12 @@ public class GameRepository : IGameRepository
                         Title = gameEntity.Title,
                         DeveloperName = gameEntity.Developer!.Name,
                         PlatformName = gameEntity.Platform!.Name,
+                        Description = gameEntity.Description,
                         ReleaseDate = gameEntity.ReleaseDate,
                         Price = gameEntity.Price,
                         Stock = gameEntity.Stock,
                     }
             )
             .ToListAsync();
-        return gameList;
     }
 }

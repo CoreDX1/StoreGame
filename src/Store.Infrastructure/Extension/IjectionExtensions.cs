@@ -23,6 +23,7 @@ public static class IjectionExtensions
         });
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IGameRepository, GameRepository>();
+        services.AddScoped(typeof(IRepositoyBase<>), typeof(RepositoyBase<>));
         return services;
     }
 }

@@ -1,20 +1,32 @@
--- Postgrest SQL
+-- Storegame.sql
+
+-- Objectivo : Crear las tablas de la base de datos
+-- Fecha: 08/08/2022
+
+-- 1. Tabla Genre
+---------------------------------------
 CREATE TABLE Genre (
     Genre_id serial PRIMARY KEY,
     Name varchar(50) NOT NULL
 );
 
+-- 2. Tabla Developer
+---------------------------------------
 CREATE TABLE Developer (
     Developer_id serial PRIMARY KEY,
     Name varchar(50) NOT NULL,
     Website varchar(100)
 );
 
+-- 3. Tabla Platform
+---------------------------------------
 CREATE TABLE Platform (
     Platform_id serial PRIMARY KEY,
     Name varchar(50) NOT NULL
 );
 
+-- 4. Tabla Game
+---------------------------------------
 CREATE TABLE Game (
     Game_id serial PRIMARY KEY,
     Title varchar(100) NOT NULL,
@@ -28,6 +40,8 @@ CREATE TABLE Game (
     CONSTRAINT fk_platform foreign key (Platform_id) references Platform(Platform_id)
 );
 
+-- 5. Tabla Customer
+---------------------------------------
 CREATE TABLE Customer (
     Customer_id serial PRIMARY KEY,
     First_name varchar(50) NOT NULL,
@@ -37,6 +51,8 @@ CREATE TABLE Customer (
     Address varchar(200)
 );
 
+-- 6. Tabla Transaction
+---------------------------------------
 CREATE TABLE Transaction (
     Transaction_id serial PRIMARY KEY,
     Customer_id int,
@@ -47,6 +63,8 @@ CREATE TABLE Transaction (
     CONSTRAINT fk_game foreign key (Game_id) references Game(Game_id)
 );
 
+-- 7. Tabla Cart
+---------------------------------------
 CREATE TABLE Cart (
     Cart_id serial PRIMARY KEY,
     Customer_id int,
@@ -56,6 +74,9 @@ CREATE TABLE Cart (
     constraint fk_game foreign key (Game_id) references Game(Game_id)
 );
 
+---------------------------------------
+
+-- 1. Catalogo de Juegos
 insert into public.game(title, description,developer_id,platform_id,release_date,price,stock,imagen)
 values('S.T.A.L.K.E.R.: Shadow of Chernobyl
 ','S.T.A.L.K.E.R.: Shadow of Chernobyl tells a story about survival in the Zone – a very dangerous place, where you fear not only the radiation, anomalies and deadly creatures, but other S.T.A.L.K.E.R.s, who have their own goals and wishes.
