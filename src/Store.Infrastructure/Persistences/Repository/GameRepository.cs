@@ -20,13 +20,16 @@ public class GameRepository : RepositoyBase<GameDto>, IGameRepository
                 gameEntity =>
                     new GameDto
                     {
+                        Id = gameEntity.GameId,
                         Title = gameEntity.Title,
                         DeveloperName = gameEntity.Developer!.Name,
+                        LinkGame = gameEntity.Developer!.Website,
                         PlatformName = gameEntity.Platform!.Name,
                         Description = gameEntity.Description,
                         ReleaseDate = gameEntity.ReleaseDate,
                         Price = gameEntity.Price,
                         Stock = gameEntity.Stock,
+                        ImageUrl = gameEntity.Imagen
                     }
             )
             .ToListAsync();
