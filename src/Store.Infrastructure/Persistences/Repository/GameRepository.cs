@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Store.Domain.Entities;
 using Store.Infrastructure.Persistences.Interfaces;
 
 namespace Store.Infrastructure.Persistences.Repository;
@@ -13,25 +14,24 @@ public class GameRepository : RepositoyBase<GameDto>, IGameRepository
         _dbContext = dbContext;
     }
 
-    public override async Task<IEnumerable<GameDto>> GetAll()
+    public async Task<IEnumerable<Game>> GetGemesQuery()
     {
-        return await _dbContext.Games
-            .Select(
-                gameEntity =>
-                    new GameDto
-                    {
-                        Id = gameEntity.GameId,
-                        Title = gameEntity.Title,
-                        DeveloperName = gameEntity.Developer!.Name,
-                        LinkGame = gameEntity.Developer!.Website,
-                        PlatformName = gameEntity.Platform!.Name,
-                        Description = gameEntity.Description,
-                        ReleaseDate = gameEntity.ReleaseDate,
-                        Price = gameEntity.Price,
-                        Stock = gameEntity.Stock,
-                        ImageUrl = gameEntity.Imagen
-                    }
-            )
-            .ToListAsync();
+        IQueryable<Game> query =
+            from g in _dbContext.Games
+            join p in _dbContext.Platforms on g.PlatformId equals p.PlatformId
+            join d in _dbContext.Developers on g.DeveloperId equals d.DeveloperId
+            select new Game
+            {
+                Title = g.Title,
+                Description = g.Description,
+                Developer = d,
+                Platform = p,
+                ReleaseDate = g.ReleaseDate,
+                Price = g.Price,
+                Stock = g.Stock,
+                Imagen = g.Imagen
+            };
+
+        return await query.ToListAsync();
     }
 }

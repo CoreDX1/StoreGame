@@ -7,9 +7,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commnos\" />
-    <Folder Include="Commnos\Base\" />
-    <Folder Include="DTO\" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
   </ItemGroup>
 
   <PropertyGroup>

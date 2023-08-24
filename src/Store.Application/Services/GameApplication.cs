@@ -1,21 +1,38 @@
-﻿using Store.Application.Interface;
+﻿using AutoMapper;
+using Store.Application.Commons.Bases;
+using Store.Application.Interface;
+using Store.Domain.Entities;
 using Store.Infrastructure.Persistences.Interfaces;
-using Store.Infrastructure.Persistences.Repository;
 
 namespace Store.Application.Services;
 
 public class GameApplication : IGameApplication
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IMapper _mapper;
 
-    public GameApplication(IUnitOfWork unitOfWork)
+    public GameApplication(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
-    public async Task<IEnumerable<GameDto>> GetGameList()
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetGameList()
     {
-        var response = await _unitOfWork.Game.GetAll();
+        var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
+        var games = await _unitOfWork.Game.GetGemesQuery();
+
+        if (games is null)
+        {
+            response.IsSuccess = false;
+            response.Message = "No se encontraron juegos";
+        }
+        else
+        {
+            response.IsSuccess = true;
+            response.Message = "Juegos encontrados";
+            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+        }
         return response;
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Store.Application.Interface;
 using Store.Application.Services;
@@ -13,6 +14,7 @@ public static class InjectionExtensions
     )
     {
         services.AddSingleton(configuration);
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddScoped<IGameApplication, GameApplication>();
         return services;
     }

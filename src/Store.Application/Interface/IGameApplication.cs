@@ -1,8 +1,9 @@
-﻿using Store.Infrastructure.Persistences.Repository;
+﻿using Store.Application.Commons.Bases;
+using Store.Domain.Entities;
 
 namespace Store.Application.Interface;
 
 public interface IGameApplication
 {
-    public Task<IEnumerable<GameDto>> GetGameList();
+    public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetGameList();
 }
