@@ -20,7 +20,7 @@ public class GameApplication : IGameApplication
     public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetGameList()
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        var games = await _unitOfWork.Game.GetGemesQuery();
+        IEnumerable<Game> games = await _unitOfWork.Game.GetGemesQuery();
 
         if (games is null)
         {

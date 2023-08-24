@@ -22,6 +22,7 @@ public class GameRepository : RepositoyBase<GameDto>, IGameRepository
             join d in _dbContext.Developers on g.DeveloperId equals d.DeveloperId
             select new Game
             {
+                GameId = g.GameId,
                 Title = g.Title,
                 Description = g.Description,
                 Developer = d,

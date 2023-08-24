@@ -8,7 +8,7 @@ public class GameMappingsProfile : Profile
     public GameMappingsProfile()
     {
         CreateMap<Game, GameTypeResponseDto>()
-            .ForMember(dest => dest.Developer, opt => opt.MapFrom(src => src.Developer!.Name))
-            .ForMember(dest => dest.Platform, opt => opt.MapFrom(src => src.Platform!.Name));
+            .ForMember(dest => dest.DeveloperName, opt => opt.MapFrom(src => src.Developer!.Name))
+            .ForMember(dest => dest.PlatformName, opt => opt.MapFrom(src => src.Platform!.Name));
     }
 }

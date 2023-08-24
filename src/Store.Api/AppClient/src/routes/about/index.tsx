@@ -1,5 +1,11 @@
 import { component$, useSignal, useTask$, $ } from "@builder.io/qwik";
 
+interface BaseResponse {
+  isSuccess: boolean;
+  data: GameModel[];
+  message: string;
+}
+
 interface GameModel {
   id: number;
   title: string;
@@ -10,11 +16,11 @@ interface GameModel {
   description: string;
   price: number;
   stock: number;
-  imageUrl: null;
+  imagen: string;
 }
 
 export default component$(() => {
-  const responseJson = useSignal<GameModel[]>();
+  const responseJson = useSignal<BaseResponse>();
 
   const apiService = $(async () => {
     const api = "http://localhost:5099/api/Game/List";
@@ -31,14 +37,10 @@ export default component$(() => {
   return (
     <div class="border-blue-500 border-2 flex justify-center">
       <div class="border-red-700 border-2 w-[900px] grid grid-cols-2 gap-4 pt-5 m-10">
-        {responseJson.value?.map((game) => (
+        {responseJson.value?.data.map((game) => (
           <div key={game.id} class="flex justify-center items-center">
             <div class="bg-white w-full shadow-md">
-              <img
-                width={500}
-                height={0}
-                src={`/Imagen/${game.imageUrl}`}
-              ></img>
+              <img width={500} height={0} src={`/Imagen/${game.imagen}`}></img>
               <div class="p-5">
                 <h2 class="text-2xl mb-2 font-normal">{game.title}</h2>
                 <p class="text-2xl text-black font-bold mb-2 text-right">
