@@ -53,7 +53,7 @@ export default component$(() => {
                   Home
                 </a>
               </li>
-              <NavLink href="http://localhost:5173/about" name="About" />
+              <NavLink href="http://localhost:5173/games" name="Games" />
               <NavLink href="#" name="Marketplace" />
               <NavLink href="#" name="Features" />
               <NavLink href="#" name="Team" />
