@@ -11,4 +11,5 @@ public class GameTypeResponseDto
     public string? Imagen { get; set; }
     public string? DeveloperName { get; set; }
     public string? PlatformName { get; set; }
+    public string? Website { get; set; }
 }
