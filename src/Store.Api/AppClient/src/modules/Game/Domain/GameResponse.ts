@@ -1,4 +1,4 @@
-export interface Game {
+export interface GameResponse {
     id: number
     title: string
     developerName: string

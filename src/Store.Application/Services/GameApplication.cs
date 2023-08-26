@@ -35,4 +35,23 @@ public class GameApplication : IGameApplication
         }
         return response;
     }
+
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name)
+    {
+        var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
+        IEnumerable<Game> games = await _unitOfWork.Game.GetNameQuery(name);
+        if (games is null)
+        {
+            response.IsSuccess = false;
+            response.Message = "No se encontraron juegos";
+            return response;
+        }
+        else
+        {
+            response.IsSuccess = true;
+            response.Message = "Juegos encontrados";
+            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+        }
+        return response;
+    }
 }

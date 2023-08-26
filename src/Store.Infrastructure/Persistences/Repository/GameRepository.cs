@@ -35,4 +35,10 @@ public class GameRepository : RepositoyBase<GameDto>, IGameRepository
 
         return await query.ToListAsync();
     }
+
+    public async Task<IEnumerable<Game>> GetNameQuery(string name)
+    {
+        IQueryable<Game> games = _dbContext.Games.Where(g => g.Title.Contains(name));
+        return await games.ToListAsync();
+    }
 }

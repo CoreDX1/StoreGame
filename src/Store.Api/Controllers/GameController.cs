@@ -25,4 +25,12 @@ public class GameController : ControllerBase
         var response = await _gameApplication.GetGameList();
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("search")]
+    public async Task<IActionResult> GameList([FromQuery] string query)
+    {
+        var response = await _gameApplication.GetTitleQuery(query);
+        return Ok(response);
+    }
 }

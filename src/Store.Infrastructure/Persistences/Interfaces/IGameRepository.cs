@@ -6,4 +6,5 @@ namespace Store.Infrastructure.Persistences.Interfaces;
 public interface IGameRepository : IRepositoyBase<GameDto>
 {
     public Task<IEnumerable<Game>> GetGemesQuery();
+    public Task<IEnumerable<Game>> GetNameQuery(string name);
 }
