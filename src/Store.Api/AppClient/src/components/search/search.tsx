@@ -20,6 +20,7 @@ export default component$(() => {
                 message: "Ingrese al menos 3 caracteres",
             };
         }
+
         const url = new URL("http://localhost:5099/api/Game/search");
         url.searchParams.set("query", query.value);
 
@@ -39,7 +40,6 @@ export default component$(() => {
                 message: "No se encontraron resultados",
             };
         }
-        console.log(json.isSuccess);
         return json;
     });
     return (
