@@ -2,26 +2,46 @@ import { Resource, component$, useResource$, useSignal } from "@builder.io/qwik"
 
 export default component$(() => {
     const query = useSignal("");
-    const nameGames = useResource$<{ title: string; website: string; IsSuccess: boolean }[]>(
-        async ({ track, cleanup }) => {
-            track(() => query.value);
-            const controller = new AbortController();
-            cleanup(() => controller.abort());
+    const nameGames = useResource$<{
+        isSuccess: boolean;
+        data: Array<{
+            title: string;
+            website: string;
+        }>;
+    }>(async ({ track, cleanup }) => {
+        track(() => query.value);
+        const controller = new AbortController();
+        cleanup(() => controller.abort());
 
-            if (query.value.length < 3) return [];
-
-            const url = new URL("http://localhost:5099/api/Game/search");
-            url.searchParams.set("query", query.value);
-
-            const resp = await fetch(url, { signal: controller.signal });
-            const json = (await resp.json()) as {
-                IsSuccess: boolean;
-                data: { title: string; website: string }[];
-                message: string;
+        if (query.value.length < 3) {
+            return {
+                isSuccess: true,
+                data: [],
+                message: "Ingrese al menos 3 caracteres",
             };
-            return json.data.map((game) => ({ title: game.title, website: game.website, IsSuccess: json.IsSuccess }));
         }
-    );
+        const url = new URL("http://localhost:5099/api/Game/search");
+        url.searchParams.set("query", query.value);
+
+        const resp = await fetch(url, { signal: controller.signal });
+        const json = (await resp.json()) as {
+            isSuccess: boolean;
+            data: Array<{
+                title: string;
+                website: string;
+            }>;
+            message: string;
+        };
+        if (json.data == null!) {
+            return {
+                isSuccess: false,
+                data: [],
+                message: "No se encontraron resultados",
+            };
+        }
+        console.log(json.isSuccess);
+        return json;
+    });
     return (
         <div class="bg-white rounded-md shadow-md p-4 w-full">
             <div class="flex items-center border border-gray-300 rounded-md overflow-hidden">
@@ -39,18 +59,22 @@ export default component$(() => {
                     value={nameGames}
                     onResolved={(nameGames) => (
                         <ul>
-                            {nameGames.map((game, i) => (
-                                <a
-                                    key={i}
-                                    onClick$={() => {
-                                        window.open(game.website, "_blank");
-                                    }}
-                                >
-                                    <li class="py-2 border-t border-gray-300 hover:bg-blue-500 hover:text-white p-3 cursor-pointer">
-                                        {game.title}
-                                    </li>
-                                </a>
-                            ))}
+                            {!nameGames.isSuccess ? (
+                                <a>El juego no existe</a>
+                            ) : (
+                                nameGames.data.map((game, i) => (
+                                    <a
+                                        key={i}
+                                        onClick$={() => {
+                                            window.open(game.website, "_blank");
+                                        }}
+                                    >
+                                        <li class="py-2 border-t border-gray-300 hover:bg-blue-500 hover:text-white p-3 cursor-pointer">
+                                            {game.title}
+                                        </li>
+                                    </a>
+                                ))
+                            )}
                         </ul>
                     )}
                 />
