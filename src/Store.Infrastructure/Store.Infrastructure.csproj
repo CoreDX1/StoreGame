@@ -5,6 +5,10 @@
     <ProjectReference Include="..\Store.Utilities\Store.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistences\Repository\Interfaces\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

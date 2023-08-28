@@ -1,0 +1,1 @@
+# arquitectura hexagonal + vertical slicing + screaming

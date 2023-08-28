@@ -40,17 +40,16 @@ public class GameApplication : IGameApplication
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
         IEnumerable<Game> games = await _unitOfWork.Game.GetNameQuery(name);
-        if (games is null)
-        {
-            response.IsSuccess = false;
-            response.Message = "No se encontraron juegos";
-            return response;
-        }
-        else
+        if (games is not null)
         {
             response.IsSuccess = true;
             response.Message = "Juegos encontrados";
             response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+        }
+        else
+        {
+            response.IsSuccess = false;
+            response.Message = "No se encontraron juegos";
         }
         return response;
     }

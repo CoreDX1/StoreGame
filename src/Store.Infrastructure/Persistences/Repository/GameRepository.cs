@@ -4,7 +4,7 @@ using Store.Infrastructure.Persistences.Interfaces;
 
 namespace Store.Infrastructure.Persistences.Repository;
 
-public class GameRepository : RepositoyBase<GameDto>, IGameRepository
+public class GameRepository : GenericRepository<Game>, IGameRepository
 {
     private readonly StoregameContext _dbContext;
 
@@ -14,10 +14,9 @@ public class GameRepository : RepositoyBase<GameDto>, IGameRepository
         _dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<Game>> GetGemesQuery()
+    private IQueryable<Game> BaseGameQuery()
     {
-        IQueryable<Game> query =
-            from g in _dbContext.Games
+        return from g in _dbContext.Games
             join p in _dbContext.Platforms on g.PlatformId equals p.PlatformId
             join d in _dbContext.Developers on g.DeveloperId equals d.DeveloperId
             select new Game
@@ -32,13 +31,24 @@ public class GameRepository : RepositoyBase<GameDto>, IGameRepository
                 Stock = g.Stock,
                 Imagen = g.Imagen
             };
+    }
 
+    public async Task<IEnumerable<Game>> GetGemesQuery()
+    {
+        var query = BaseGameQuery();
         return await query.ToListAsync();
     }
 
     public async Task<IEnumerable<Game>> GetNameQuery(string name)
     {
-        IQueryable<Game> games = _dbContext.Games.Where(g => g.Title.Contains(name));
+        var query = BaseGameQuery();
+        var games = query.Where(x => x.Title.ToLower().Contains(name.ToLower()));
+
+        if (games.Count() == 0)
+        {
+            return null!;
+        }
+
         return await games.ToListAsync();
     }
 }

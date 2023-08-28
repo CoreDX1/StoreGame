@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Store.Infrastructure.Persistences.Repository;
 using Store.Infrastructure.Persistences.Interfaces;
+using Store.Infrastructure.Persistences.Repository;
 
 namespace Store.Infrastructure.Extension;
 
@@ -14,6 +14,8 @@ public static class IjectionExtensions
     )
     {
         var assembly = typeof(StoregameContext).Assembly.FullName;
+
+        // Initialising my DbContext
         services.AddDbContext<StoregameContext>(options =>
         {
             options.UseNpgsql(
@@ -23,7 +25,7 @@ public static class IjectionExtensions
         });
         services.AddTransient<IUnitOfWork, UnitOfWork>();
         services.AddTransient<IGameRepository, GameRepository>();
-        services.AddScoped(typeof(IRepositoyBase<>), typeof(RepositoyBase<>));
+        services.AddScoped(typeof(IGenericRespository<>), typeof(GenericRepository<>));
         return services;
     }
 }
