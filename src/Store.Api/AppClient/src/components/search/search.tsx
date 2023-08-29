@@ -66,7 +66,7 @@ export default component$(() => {
     });
 
     return (
-        <div class="rounded-md w-full max-w-2xl mx-auto relative">
+        <div class="rounded-md w-[500px] max-w-2xl mx-auto relative">
             <div class="flex items-center border rounded-md overflow-hidden" ref={searchContainerRef}>
                 <input
                     class="flex-auto bg-transparent  py-2 px-4 focus:outline-none"
@@ -74,11 +74,9 @@ export default component$(() => {
                     onFocus$={() => (IsMenuOpen.value = true)}
                     bind:value={query}
                 />
-                <button class="bg-primary text-white py-2 px-6 rounded-r-md hover:bg-opacity-80 focus:outline-none">
-                    Buscar
-                </button>
+                <button class="bg-primary py-2 px-6 rounded-r-md hover:bg-opacity-80 focus:outline-none">Buscar</button>
             </div>
-            <div class="mt-4 absolute  bg-white w-full  max-w-2xl overflow-y-auto ">
+            <div class="absolute  bg-white w-full  max-w-2xl overflow-y-auto ">
                 <Resource
                     value={nameGames}
                     onResolved={(nameGames) => (
@@ -91,11 +89,7 @@ export default component$(() => {
                                             class="py-2 text-[#434343CC]  w-auto hover:bg-blue-500 p-3 cursor-pointer bg-white "
                                         >
                                             <div>
-                                                <a
-                                                    onClick$={() => {
-                                                        window.open(game.website, "_blank");
-                                                    }}
-                                                >
+                                                <a href={game.website} target="_blank">
                                                     {game.title}
                                                 </a>
                                                 <p>{formatCurrencyARS(game.price)}</p>

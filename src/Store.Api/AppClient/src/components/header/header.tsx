@@ -4,22 +4,22 @@ import Search from "../search/search";
 
 export default component$(() => {
     return (
-        <header class="pt-2 pb-4">
-            <div class="pr-4 lg:pr-6 ">
-                <ul class="flex justify-end gap-5">
-                    <li>
-                        <a href="#">INICIAR SESIÓN</a>
-                    </li>
-                    <li>
-                        <a href="#">CREAR CUENTA</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="w-[1200px] mx-auto">
-                <div class="flex justify-between items-center">
+        <header class="pt-2  w-[930px] mx-auto">
+            <div>
+                <div>
+                    <ul class="flex justify-end gap-5">
+                        <li>
+                            <a href="#">INICIAR SESIÓN</a>
+                        </li>
+                        <li>
+                            <a href="#">CREAR CUENTA</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-start w-full flex justify-center">
                     <img
-                        height={200}
-                        width={200}
+                        height={10}
+                        width={50}
                         src="https://flowbite.com/docs/images/logo.svg"
                         class="mr-3 h-6 sm:h-9"
                         alt="Flowbite Logo"
