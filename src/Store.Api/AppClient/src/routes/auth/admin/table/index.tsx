@@ -4,12 +4,17 @@ import { ApiGameRepository } from "~/modules/Game/infrastructure/ApiGameReposito
 import { type BaseResponse } from "~/modules/types/BaseResponse";
 import EditGameWindow from "~/components/editGameWindow/editGameWindow";
 import ProductTable from "~/components/productTable/productTable";
+import { getGameNameOrder } from "~/modules/Game/application/get/getGameNameOrder";
 
 export default component$(() => {
     const gameJson = useSignal<BaseResponse<GameResponse[]>>();
 
     const selectGame = useSignal<BaseResponse<GameResponse>>();
     const edit = useSignal<boolean>(false);
+
+    const getOrder = $(async () => {
+        gameJson.value = await getGameNameOrder();
+    });
 
     useTask$(async () => {
         gameJson.value = await ApiGameRepository.getAll();
@@ -41,7 +46,7 @@ export default component$(() => {
             {edit.value && <EditGameWindow game={selectGame.value?.data} onClose={handleCloseEdit} />}
             <div class="container mx-auto p-4 relative">
                 <h2 class="text-xl font-bold mb-4">Tabla de Productos</h2>
-                <ProductTable gameJson={gameJson.value} onSelectGame={handleEditClick} />
+                <ProductTable gameJson={gameJson.value} onSelectGame={handleEditClick} order={getOrder} />
             </div>
         </div>
     );

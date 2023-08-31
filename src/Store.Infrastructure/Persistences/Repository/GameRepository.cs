@@ -39,6 +39,12 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         return game!;
     }
 
+    public async Task<IEnumerable<Game>> GetNameOrder()
+    {
+        var games = await BaseGameQuery().OrderBy(x => x.Title).ToListAsync();
+        return games;
+    }
+
     public async Task<IEnumerable<Game>> GetGemesQuery()
     {
         var query = BaseGameQuery().OrderBy(x => x.GameId);

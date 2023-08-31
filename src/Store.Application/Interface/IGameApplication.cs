@@ -8,4 +8,5 @@ public interface IGameApplication
     public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetGameList();
     public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name);
     public Task<BaseResponse<GameTypeResponseDto>> GetById(int id);
+    public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetNameOrder();
 }

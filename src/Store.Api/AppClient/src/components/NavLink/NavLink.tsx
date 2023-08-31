@@ -5,14 +5,14 @@ interface ItemProps {
     href: string;
 }
 
-export default component$<ItemProps>((prop) => {
+export default component$<ItemProps>(({ href, name }) => {
     return (
         <li>
             <a
-                href={prop.href}
+                href={href}
                 class="tracking-widest block text-xl py-2 pr-4 pl-3 text-black border-gray-100 hover:text-gray-400"
             >
-                {prop.name}
+                {name}
             </a>
         </li>
     );

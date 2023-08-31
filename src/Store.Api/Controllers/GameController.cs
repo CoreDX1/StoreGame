@@ -41,4 +41,12 @@ public class GameController : ControllerBase
         var response = await _gameApplication.GetById(id);
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("order")]
+    public async Task<IActionResult> Order()
+    {
+        var response = await _gameApplication.GetNameOrder();
+        return Ok(response);
+    }
 }
