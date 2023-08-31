@@ -30,9 +30,10 @@ public class GenericRepository<TEntity> : IGenericRespository<TEntity>
         return getAll;
     }
 
-    public Task<TEntity> GetById(int id)
+    public virtual async Task<TEntity> GetById(int id)
     {
-        throw new NotImplementedException();
+        var getById = await _entity.FindAsync(id);
+        return getById!;
     }
 
     public Task<bool> Update(TEntity entity)

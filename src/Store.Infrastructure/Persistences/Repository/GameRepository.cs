@@ -33,9 +33,15 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             };
     }
 
+    public override async Task<Game> GetById(int id)
+    {
+        var game = await BaseGameQuery().FirstOrDefaultAsync(x => x.GameId == id);
+        return game!;
+    }
+
     public async Task<IEnumerable<Game>> GetGemesQuery()
     {
-        var query = BaseGameQuery();
+        var query = BaseGameQuery().OrderBy(x => x.GameId);
         return await query.ToListAsync();
     }
 

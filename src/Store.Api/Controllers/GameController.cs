@@ -33,4 +33,12 @@ public class GameController : ControllerBase
         var response = await _gameApplication.GetTitleQuery(query);
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("search/{id:int}")]
+    public async Task<IActionResult> GetById([FromRoute] int id)
+    {
+        var response = await _gameApplication.GetById(id);
+        return Ok(response);
+    }
 }
