@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Application.DTO.Game.Request;
 using Store.Application.Interface;
 
 namespace Store.Api.Controllers;
@@ -42,11 +43,11 @@ public class GameController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("order")]
-    public async Task<IActionResult> Order()
+    public async Task<IActionResult> Order([FromBody] OrderRequestDto order)
     {
-        var response = await _gameApplication.GetNameOrder();
+        var response = await _gameApplication.GetNameOrder(order);
         return Ok(response);
     }
 }

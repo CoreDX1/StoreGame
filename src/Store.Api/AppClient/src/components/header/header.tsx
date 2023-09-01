@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import NavLink from "../NavLink/NavLink";
-import Search from "../search/search";
+import Search from "../Search/search";
 
 export default component$(() => {
     return (

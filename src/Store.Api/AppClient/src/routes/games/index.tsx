@@ -1,5 +1,5 @@
 import { component$, useSignal, useTask$ } from "@builder.io/qwik";
-import Product from "~/components/product/product";
+import Product from "~/components/Product/Product";
 import { type GameResponse } from "~/modules/Game/Domain/GameResponse";
 import { ApiGameRepository } from "~/modules/Game/infrastructure/ApiGameRepository";
 import { type BaseResponse } from "~/modules/types/BaseResponse";

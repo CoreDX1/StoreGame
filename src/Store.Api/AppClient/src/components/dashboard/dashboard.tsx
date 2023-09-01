@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import NavItem from "../navItem/navItem";
-
+import NavItem from "../NavItem/NavItem";
 export default component$(() => {
     return (
         <header class="min-h-screen flex justify-center bg-gray-100">
