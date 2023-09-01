@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Store.Application.Commons.Bases;
+using Store.Application.DTO.Game.Request;
 using Store.Application.DTO.Game.Response;
 using Store.Application.Interface;
 using Store.Domain.Entities;
+using Store.Infrastructure.Commons.Request;
 using Store.Infrastructure.Persistences.Interfaces;
 
 namespace Store.Application.Services;
@@ -57,10 +59,13 @@ public class GameApplication : IGameApplication
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetNameOrder()
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetNameOrder(
+        OrderRequestDto orderRequest
+    )
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        IEnumerable<Game> games = await _unitOfWork.Game.GetNameOrder();
+        var paginationOrderRequest = _mapper.Map<BasePaginationOrderRequest>(orderRequest);
+        IEnumerable<Game> games = await _unitOfWork.Game.GetNameOrder(paginationOrderRequest);
         if (games is null)
         {
             response.IsSuccess = false;

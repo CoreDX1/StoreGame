@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Store.Domain.Entities;
+using Store.Infrastructure.Commons.Request;
 using Store.Infrastructure.Persistences.Interfaces;
 
 namespace Store.Infrastructure.Persistences.Repository;
@@ -39,10 +40,16 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         return game!;
     }
 
-    public async Task<IEnumerable<Game>> GetNameOrder()
+    public async Task<IEnumerable<Game>> GetNameOrder(BasePaginationOrderRequest orderRequest)
     {
-        var games = await BaseGameQuery().OrderBy(x => x.Title).ToListAsync();
-        return games;
+        IQueryable<Game> games = BaseGameQuery();
+
+        if (orderRequest.Records)
+            games = games.OrderBy(x => x.Title);
+        else
+            games = games.OrderBy(x => x.GameId);
+
+        return await games.ToListAsync();
     }
 
     public async Task<IEnumerable<Game>> GetGemesQuery()

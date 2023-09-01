@@ -100,7 +100,18 @@ JOIN
 
 
 
-
+insert into public.game(title, description, developer_id, platform_id, release_date, price, stock, imagen)
+values
+('Título del Juego 1', 'Descripción del Juego 1', 2, 1, '2023-01-15', 2999, 50, 'imagen1.jpg'),
+('Título del Juego 2', 'Descripción del Juego 2', 3, 2, '2022-11-30', 1999, 25, 'imagen2.jpg'),
+('Título del Juego 3', 'Descripción del Juego 3', 1, 3, '2023-04-05', 4499, 15, 'imagen3.jpg'),
+('Título del Juego 4', 'Descripción del Juego 4', 4, 1, '2022-09-10', 3499, 30, 'imagen4.jpg'),
+('Título del Juego 5', 'Descripción del Juego 5', 2, 2, '2023-03-22', 2499, 40, 'imagen5.jpg'),
+('Título del Juego 6', 'Descripción del Juego 6', 3, 3, '2022-07-17', 1999, 20, 'imagen6.jpg'),
+('Título del Juego 7', 'Descripción del Juego 7', 1, 1, '2023-06-08', 2999, 35, 'imagen7.jpg'),
+('Título del Juego 8', 'Descripción del Juego 8', 4, 2, '2022-12-20', 4499, 10, 'imagen8.jpg'),
+('Título del Juego 9', 'Descripción del Juego 9', 2, 3, '2023-02-14', 3499, 28, 'imagen9.jpg'),
+('Título del Juego 10', 'Descripción del Juego 10', 3, 1, '2022-10-03', 2499, 22, 'imagen10.jpg');
 
 
 
