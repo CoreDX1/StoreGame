@@ -1,26 +1,14 @@
-import { $, component$, Resource, useSignal, useStore } from "@builder.io/qwik";
+import { component$, Resource } from "@builder.io/qwik";
 import { MoArrowDown, MoEditAlt } from "@qwikest/icons/monoicons";
 import { type GameResource } from "../Search/Search";
-import { getGameNameOrder, type Order } from "~/modules/Game/application/get/getGameNameOrder";
-import { type GameResponse } from "~/modules/Game/Domain/GameResponse";
-import { type BaseResponse } from "~/modules/types/BaseResponse";
 
 interface Props {
     gameJson: Promise<GameResource>;
     onSelectGame: (id: number) => Promise<void>;
+    order: () => Promise<void>;
 }
 
-export default component$<Props>(({ gameJson, onSelectGame }) => {
-    const gameData = useSignal<BaseResponse<GameResponse[]>>();
-    const orderState = useStore<Order>({
-        order: "desc",
-    });
-
-    const toggleOrder = $(async () => {
-        orderState.order = orderState.order === "asc" ? "desc" : "asc";
-        gameData.value = await getGameNameOrder(orderState);
-    });
-
+export default component$<Props>(({ gameJson, onSelectGame, order }) => {
     return (
         <table class="min-w-full bg-white">
             <thead class="bg-gray-50">
@@ -29,7 +17,7 @@ export default component$<Props>(({ gameJson, onSelectGame }) => {
                         Nombre
                         <button
                             onClick$={() => {
-                                toggleOrder();
+                                order();
                             }}
                         >
                             <MoArrowDown />

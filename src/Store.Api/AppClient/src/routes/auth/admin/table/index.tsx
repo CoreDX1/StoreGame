@@ -1,4 +1,4 @@
-import { component$, useSignal, useTask$, $, useVisibleTask$, useResource$ } from "@builder.io/qwik";
+import { component$, useSignal, useTask$, $, useVisibleTask$, useResource$, useStore } from "@builder.io/qwik";
 import { type GameResponse } from "~/modules/Game/Domain/GameResponse";
 import { ApiGameRepository } from "~/modules/Game/infrastructure/ApiGameRepository";
 import { type BaseResponse } from "~/modules/types/BaseResponse";
@@ -6,6 +6,7 @@ import EditGameWindow from "~/components/EditGameWindow/EditGameWindow";
 import ProductTable from "~/components/ProductTable/ProductTable";
 import { HiBars3Solid } from "@qwikest/icons/heroicons";
 import { type GameResource } from "~/components/Search/Search";
+import { type Order, getGameNameOrder } from "~/modules/Game/application/get/getGameNameOrder";
 
 export default component$(() => {
     const gameData = useSignal<BaseResponse<GameResponse[]>>();
@@ -13,8 +14,17 @@ export default component$(() => {
     const isEditMode = useSignal<boolean>(false);
     const query = useSignal("");
 
+    const orderState = useStore<Order>({
+        order: "desc",
+    });
+
     useTask$(async () => {
         gameData.value = await ApiGameRepository.getAll();
+    });
+
+    const toggleOrder = $(async () => {
+        orderState.order = orderState.order === "asc" ? "desc" : "asc";
+        gameData.value = await getGameNameOrder(orderState);
     });
 
     const handleCloseEdit = $(() => {
@@ -26,6 +36,7 @@ export default component$(() => {
         const controller = new AbortController();
 
         if (query.value.length < 3) {
+            // await toggleOrder();
             return {
                 isSuccess: false,
                 data: gameData.value?.data,
@@ -86,7 +97,7 @@ export default component$(() => {
                         Buscar
                     </button>
                 </div>
-                <ProductTable gameJson={nameGames.value} onSelectGame={handleEditClick} />
+                <ProductTable gameJson={nameGames.value} onSelectGame={handleEditClick} order={toggleOrder} />
             </div>
         </div>
     );
