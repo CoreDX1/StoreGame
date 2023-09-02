@@ -1,8 +1,7 @@
-import { component$, useSignal, useTask$, $, useVisibleTask$, useStore, useResource$ } from "@builder.io/qwik";
+import { component$, useSignal, useTask$, $, useVisibleTask$, useResource$ } from "@builder.io/qwik";
 import { type GameResponse } from "~/modules/Game/Domain/GameResponse";
 import { ApiGameRepository } from "~/modules/Game/infrastructure/ApiGameRepository";
 import { type BaseResponse } from "~/modules/types/BaseResponse";
-import { getGameNameOrder, type Order } from "~/modules/Game/application/get/getGameNameOrder";
 import EditGameWindow from "~/components/EditGameWindow/EditGameWindow";
 import ProductTable from "~/components/ProductTable/ProductTable";
 import { HiBars3Solid } from "@qwikest/icons/heroicons";
@@ -13,15 +12,6 @@ export default component$(() => {
     const selectGame = useSignal<BaseResponse<GameResponse>>();
     const isEditMode = useSignal<boolean>(false);
     const query = useSignal("");
-
-    const orderState = useStore<Order>({
-        order: "desc",
-    });
-
-    const toggleOrder = $(async () => {
-        orderState.order = orderState.order === "asc" ? "desc" : "asc";
-        gameData.value = await getGameNameOrder(orderState);
-    });
 
     useTask$(async () => {
         gameData.value = await ApiGameRepository.getAll();
@@ -83,7 +73,7 @@ export default component$(() => {
                     </span>
                     Productos
                 </h2>
-                {/* Tengo que hacer que los inputs de busqueda sean dinamicos */}
+                {/* Filtara juegos */}
                 <div class="rounded-md w-[500px] max-w-2xl mx-auto relative" />
                 <div class="flex items-center border rounded-md overflow-hidden">
                     <input
@@ -96,7 +86,7 @@ export default component$(() => {
                         Buscar
                     </button>
                 </div>
-                <ProductTable gameJson={nameGames.value} onSelectGame={handleEditClick} order={toggleOrder} />
+                <ProductTable gameJson={nameGames.value} onSelectGame={handleEditClick} />
             </div>
         </div>
     );
