@@ -70,4 +70,57 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
 
         return await games.ToListAsync();
     }
+
+    public async Task<IEnumerable<Game>> PostFilter(GameFilterProductDto filterProductDto)
+    {
+        var game = BaseGameQuery();
+
+        if (!string.IsNullOrWhiteSpace(filterProductDto.Search))
+        {
+            game = game.Where(x => x.Title.ToLower().Contains(filterProductDto.Search.ToLower()));
+        }
+
+        if (filterProductDto.Records)
+            game = game.OrderBy(x => x.Title);
+        else
+            game = game.OrderBy(x => x.GameId);
+
+        if (
+            filterProductDto.RealeaseDateBefore != null
+            && filterProductDto.RealeaseDateAfter != null
+        )
+        {
+            var releaseDateBefore = DateOnly.FromDateTime(
+                filterProductDto.RealeaseDateBefore.Value
+            );
+            var releaseDateAfter = DateOnly.FromDateTime(filterProductDto.RealeaseDateAfter.Value);
+
+            game = game.Where(
+                product =>
+                    product.ReleaseDate >= releaseDateAfter
+                    && product.ReleaseDate <= releaseDateBefore
+            );
+        }
+
+        if (filterProductDto.PriceMax != null && filterProductDto.PriceMin != null)
+        {
+            game = game.Where(
+                product =>
+                    product.Price >= filterProductDto.PriceMin
+                    && product.Price <= filterProductDto.PriceMax
+            );
+        }
+
+        if (!string.IsNullOrWhiteSpace(filterProductDto.DeveloperName))
+        {
+            game = game.Where(name => name.Developer!.Name == filterProductDto.DeveloperName);
+        }
+
+        if (!string.IsNullOrWhiteSpace(filterProductDto.PlatformName))
+        {
+            game = game.Where(name => name.Title == filterProductDto.PlatformName);
+        }
+
+        return await game.ToListAsync();
+    }
 }

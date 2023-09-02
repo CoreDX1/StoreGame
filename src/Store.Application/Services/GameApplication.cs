@@ -97,4 +97,24 @@ public class GameApplication : IGameApplication
         }
         return response;
     }
+
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> PostGameFilter(
+        GameFilterProductDto filterProductDto
+    )
+    {
+        var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
+        IEnumerable<Game> games = await _unitOfWork.Game.PostFilter(filterProductDto);
+        if (games is not null)
+        {
+            response.IsSuccess = true;
+            response.Message = "Juegos encontrados";
+            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+        }
+        else
+        {
+            response.IsSuccess = false;
+            response.Message = "No se encontraron juegos";
+        }
+        return response;
+    }
 }
