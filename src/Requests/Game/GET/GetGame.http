@@ -1,0 +1,10 @@
+@hostname = localhost
+@port = 5099
+@host = {{hostname}}:{{port}}
+
+### List
+GET http://{{host}}/api/Game/List 
+
+### Search Name
+GET http://localhost:5099/api/Game/search
+    ?query=metal

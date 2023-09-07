@@ -1,14 +1,14 @@
 ﻿namespace Store.Application.DTO.Game.Request;
 
-public class FilterRequestDto
+public record FilterRequestDto
 {
-    public string? Order { get; set; }
-    public string Search { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public DateOnly? RealeaseDateBefore { get; set; }
-    public DateOnly? RealeaseDateAfter { get; set; }
-    public decimal? PriceMin { get; set; }
-    public decimal? PriceMax { get; set; }
-    public string DeveloperName { get; set; } = string.Empty;
-    public string PlatformName { get; set; } = string.Empty;
+    public string? Order;
+    public string? Search;
+    public string? Title;
+    public DateOnly? RealeaseDateBefore;
+    public DateOnly? RealeaseDateAfter;
+    public decimal? PriceMin;
+    public decimal? PriceMax;
+    public string? DeveloperName;
+    public string? PlatformName;
 }
