@@ -1,0 +1,22 @@
+# {
+#   "order": "string",
+#   "search": "string",
+#   "title": "string",
+#   "realeaseDateBefore": "2023-09-07T17:32:58.594Z",
+#   "realeaseDateAfter": "2023-09-07T17:32:58.594Z",
+#   "priceMin": 0,
+#   "priceMax": 0,
+#   "developerName": "string",
+#   "platformName": "string",
+#   "records": true
+# }
+
+### Filter
+POST http://localhost:5099/api/Game/filter
+Content-Type: application/json
+
+{
+    "title": "s.t.a.l.k.",
+    "priceMin": 0,
+    "priceMax": 1000
+}

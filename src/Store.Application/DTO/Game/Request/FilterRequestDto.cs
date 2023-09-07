@@ -3,7 +3,6 @@
 public record FilterRequestDto
 {
     public string? Order;
-    public string? Search;
     public string? Title;
     public DateOnly? RealeaseDateBefore;
     public DateOnly? RealeaseDateAfter;

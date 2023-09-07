@@ -71,13 +71,13 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         return await games.ToListAsync();
     }
 
-    public async Task<IEnumerable<Game>> PostFilter(GameFilterProductDto filterProductDto)
+    public async Task<IEnumerable<Game>> Filter(GameFilterProductDto filterProductDto)
     {
         var game = BaseGameQuery();
 
-        if (!string.IsNullOrWhiteSpace(filterProductDto.Search))
+        if (!string.IsNullOrWhiteSpace(filterProductDto.Title))
         {
-            game = game.Where(x => x.Title.ToLower().Contains(filterProductDto.Search.ToLower()));
+            game = game.Where(x => x.Title.ToLower().Contains(filterProductDto.Title.ToLower()));
         }
 
         if (filterProductDto.Records)
@@ -121,6 +121,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             game = game.Where(name => name.Title == filterProductDto.PlatformName);
         }
 
-        return await game.ToListAsync();
+        var result = await game.ToListAsync();
+        return result.Count > 0 ? result : null!;
     }
 }

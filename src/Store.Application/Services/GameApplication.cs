@@ -6,6 +6,7 @@ using Store.Application.Interface;
 using Store.Domain.Entities;
 using Store.Infrastructure.Commons.Request;
 using Store.Infrastructure.Persistences.Interfaces;
+using Store.Utilities.Static;
 
 namespace Store.Application.Services;
 
@@ -28,12 +29,12 @@ public class GameApplication : IGameApplication
         if (game is null)
         {
             response.IsSuccess = false;
-            response.Message = "No se encontro el juego";
+            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
         }
         else
         {
             response.IsSuccess = true;
-            response.Message = "Juego encontrado";
+            response.Message = ReplyMessage.MESSAGE_QUERY;
             response.Data = _mapper.Map<GameTypeResponseDto>(game);
         }
 
@@ -48,12 +49,12 @@ public class GameApplication : IGameApplication
         if (games is null)
         {
             response.IsSuccess = false;
-            response.Message = "No se encontraron juegos";
+            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
         }
         else
         {
             response.IsSuccess = true;
-            response.Message = "Juegos encontrados";
+            response.Message = ReplyMessage.MESSAGE_QUERY;
             response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
         }
         return response;
@@ -69,12 +70,12 @@ public class GameApplication : IGameApplication
         if (games is null)
         {
             response.IsSuccess = false;
-            response.Message = "No se encontraron juegos";
+            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
         }
         else
         {
             response.IsSuccess = true;
-            response.Message = "Juegos encontrados";
+            response.Message = ReplyMessage.MESSAGE_QUERY;
             response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
         }
         return response;
@@ -84,16 +85,16 @@ public class GameApplication : IGameApplication
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
         IEnumerable<Game> games = await _unitOfWork.Game.GetNameQuery(name);
-        if (games is not null)
+        if (games is null)
         {
-            response.IsSuccess = true;
-            response.Message = "Juegos encontrados";
-            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+            response.IsSuccess = false;
+            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
         }
         else
         {
-            response.IsSuccess = false;
-            response.Message = "No se encontraron juegos";
+            response.IsSuccess = true;
+            response.Message = ReplyMessage.MESSAGE_QUERY;
+            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
         }
         return response;
     }
@@ -103,11 +104,11 @@ public class GameApplication : IGameApplication
     )
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        IEnumerable<Game> games = await _unitOfWork.Game.PostFilter(filterProductDto);
+        IEnumerable<Game> games = await _unitOfWork.Game.Filter(filterProductDto);
         if (games is not null)
         {
             response.IsSuccess = true;
-            response.Message = "Juegos encontrados";
+            response.Message = ReplyMessage.MESSAGE_QUERY;
             response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
         }
         else

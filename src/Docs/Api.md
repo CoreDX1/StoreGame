@@ -9,7 +9,7 @@
       - [Id](#game-id)
         - [Request](#id-request)
         - [Response](#id-response)
-      - [Filter](#game-filter)
+      - [Filter](#filter)
         - [Request](#filter-request)
         - [Response](#filter-response)
 
