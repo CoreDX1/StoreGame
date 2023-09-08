@@ -9,6 +9,7 @@ var Configuration = builder.Configuration;
 var Cors = "Cors";
 builder.Services.AddInjectionInfrastructure(Configuration);
 builder.Services.AddInjectionApplication(Configuration);
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 builder.Services.AddControllers();
 

@@ -18,7 +18,7 @@
 
 ### List
 ```js
-GET {{host}}/api/Game/list
+GET {{host}}/api/game/list
 ```
 
 #### List Response
@@ -62,12 +62,12 @@ GET {{host}}/api/Game/list
 
 ### Search
 ```js
-GET {{host}}/api/Game/search
+GET {{host}}/api/game/search
 ```
 
 #### Search Request
 ```js
-GET {{host}}/api/Game/search?query={{query}}
+GET {{host}}/api/game/search?query={{query}}
 ```
 
 #### Search Response
@@ -100,12 +100,12 @@ GET {{host}}/api/Game/search?query={{query}}
 
 ### Id
 ```js
-GET {{host}}/api/Game/search/
+GET {{host}}/api/game/search/
 ```
 
 #### Id Request
 ```js
-GET {{host}}/api/Game/search/{{id}}
+GET {{host}}/api/game/search/{{id}}
 ```
 
 #### Id Response
@@ -136,12 +136,12 @@ GET {{host}}/api/Game/search/{{id}}
 
 ### Filter
 ```js
-GET {{host}}/api/Game/filter
+GET {{host}}/api/game/filter
 ```
 
 #### Filter Request
 ```js
-POST {{host}}/api/Game/filter
+POST {{host}}/api/game/filter
 ```
 
 ```json

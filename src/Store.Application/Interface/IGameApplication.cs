@@ -7,11 +7,16 @@ namespace Store.Application.Interface;
 
 public interface IGameApplication
 {
-    public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetGameList();
-    public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name);
-    public Task<BaseResponse<GameTypeResponseDto>> GetById(int id);
-    public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetNameOrder(OrderRequestDto order);
-    public Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> PostGameFilter(
+    /// <summary>
+    /// Gets a list of games.
+    /// </summary>
+    Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GameListAsync();
+    Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> SearchGamesByTitleAsync(string name);
+    Task<BaseResponse<GameTypeResponseDto>> GameByIdAsync(int id);
+    Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> OrderGamesByTitleAsync(
+        OrderRequestDto order
+    );
+    Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> FilterGamesAsync(
         GameFilterProductDto filterProductDto
     );
 }

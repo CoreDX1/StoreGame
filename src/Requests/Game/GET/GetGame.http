@@ -3,8 +3,11 @@
 @host = {{hostname}}:{{port}}
 
 ### List
-GET http://{{host}}/api/Game/List 
+GET http://{{host}}/api/game/List 
+Content-Type: application/json
 
 ### Search Name
-GET http://localhost:5099/api/Game/search
+GET http://localhost:5099/api/game/search
     ?query=metal
+
+Content-Type: application/json

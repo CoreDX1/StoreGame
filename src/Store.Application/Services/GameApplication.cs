@@ -21,7 +21,7 @@ public class GameApplication : IGameApplication
         _mapper = mapper;
     }
 
-    public async Task<BaseResponse<GameTypeResponseDto>> GetById(int id)
+    public async Task<BaseResponse<GameTypeResponseDto>> GameByIdAsync(int id)
     {
         var response = new BaseResponse<GameTypeResponseDto>();
         Game game = await _unitOfWork.Game.GetById(id);
@@ -41,7 +41,7 @@ public class GameApplication : IGameApplication
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetGameList()
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GameListAsync()
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
         IEnumerable<Game> games = await _unitOfWork.Game.GetGemesQuery();
@@ -60,7 +60,7 @@ public class GameApplication : IGameApplication
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetNameOrder(
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> OrderGamesByTitleAsync(
         OrderRequestDto orderRequest
     )
     {
@@ -81,7 +81,9 @@ public class GameApplication : IGameApplication
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name)
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> SearchGamesByTitleAsync(
+        string name
+    )
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
         IEnumerable<Game> games = await _unitOfWork.Game.GetNameQuery(name);
@@ -99,7 +101,7 @@ public class GameApplication : IGameApplication
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> PostGameFilter(
+    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> FilterGamesAsync(
         GameFilterProductDto filterProductDto
     )
     {

@@ -21,10 +21,10 @@ public class GameController : ControllerBase
     /// </summary>
     /// <returns>Una accion de que devuelve la lista de juegos</returns>
     [HttpGet]
-    [Route("List")]
+    [Route("list")]
     public async Task<IActionResult> GameList()
     {
-        var response = await _gameApplication.GetGameList();
+        var response = await _gameApplication.GameListAsync();
         return Ok(response);
     }
 
@@ -32,15 +32,15 @@ public class GameController : ControllerBase
     [Route("search")]
     public async Task<IActionResult> GameList([FromQuery] string query)
     {
-        var response = await _gameApplication.GetTitleQuery(query);
+        var response = await _gameApplication.SearchGamesByTitleAsync(query);
         return Ok(response);
     }
 
     [HttpGet]
-    [Route("search/{id:int}")]
+    [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
-        var response = await _gameApplication.GetById(id);
+        var response = await _gameApplication.GameByIdAsync(id);
         return Ok(response);
     }
 
@@ -48,7 +48,7 @@ public class GameController : ControllerBase
     [Route("order")]
     public async Task<IActionResult> Order([FromBody] OrderRequestDto order)
     {
-        var response = await _gameApplication.GetNameOrder(order);
+        var response = await _gameApplication.OrderGamesByTitleAsync(order);
         return Ok(response);
     }
 
@@ -56,7 +56,7 @@ public class GameController : ControllerBase
     [Route("filter")]
     public async Task<IActionResult> FilterGame([FromBody] GameFilterProductDto filterProductDto)
     {
-        var response = await _gameApplication.PostGameFilter(filterProductDto);
+        var response = await _gameApplication.FilterGamesAsync(filterProductDto);
         return Ok(response);
     }
 }
