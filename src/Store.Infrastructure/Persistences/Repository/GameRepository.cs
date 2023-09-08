@@ -34,22 +34,10 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             };
     }
 
-    public override async Task<Game> GetById(int id)
+    public override async Task<Game> GetByIdAsync(int id)
     {
-        var game = await BaseGameQuery().FirstOrDefaultAsync(x => x.GameId == id);
+        var game = await BaseGameQuery().FirstAsync(x => x.GameId.Equals(id));
         return game!;
-    }
-
-    public async Task<IEnumerable<Game>> GetNameOrder(BasePaginationOrderRequest orderRequest)
-    {
-        IQueryable<Game> games = BaseGameQuery();
-
-        if (orderRequest.Records)
-            games = games.OrderBy(x => x.Title);
-        else
-            games = games.OrderBy(x => x.GameId);
-
-        return await games.ToListAsync();
     }
 
     public async Task<IEnumerable<Game>> GetGemesQuery()
@@ -71,7 +59,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         return await games.ToListAsync();
     }
 
-    public async Task<IEnumerable<Game>> Filter(GameFilterProductDto filterProductDto)
+    public async Task<IEnumerable<Game>> FilterGameAsync(GameFilterProductDto filterProductDto)
     {
         var game = BaseGameQuery();
 
@@ -111,14 +99,14 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             );
         }
 
-        if (!string.IsNullOrWhiteSpace(filterProductDto.DeveloperName))
+        if (!string.IsNullOrWhiteSpace(filterProductDto.Developer))
         {
-            game = game.Where(name => name.Developer!.Name == filterProductDto.DeveloperName);
+            game = game.Where(name => name.Developer!.Name == filterProductDto.Developer);
         }
 
-        if (!string.IsNullOrWhiteSpace(filterProductDto.PlatformName))
+        if (!string.IsNullOrWhiteSpace(filterProductDto.Platform))
         {
-            game = game.Where(name => name.Title == filterProductDto.PlatformName);
+            game = game.Where(name => name.Title == filterProductDto.Platform);
         }
 
         var result = await game.ToListAsync();

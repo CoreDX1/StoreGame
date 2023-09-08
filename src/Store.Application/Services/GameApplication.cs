@@ -24,7 +24,7 @@ public class GameApplication : IGameApplication
     public async Task<BaseResponse<GameTypeResponseDto>> GameByIdAsync(int id)
     {
         var response = new BaseResponse<GameTypeResponseDto>();
-        Game game = await _unitOfWork.Game.GetById(id);
+        Game game = await _unitOfWork.Game.GetByIdAsync(id);
 
         if (game is null)
         {
@@ -60,53 +60,13 @@ public class GameApplication : IGameApplication
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> OrderGamesByTitleAsync(
-        OrderRequestDto orderRequest
-    )
-    {
-        var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        var paginationOrderRequest = _mapper.Map<BasePaginationOrderRequest>(orderRequest);
-        IEnumerable<Game> games = await _unitOfWork.Game.GetNameOrder(paginationOrderRequest);
-        if (games is null)
-        {
-            response.IsSuccess = false;
-            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
-        }
-        else
-        {
-            response.IsSuccess = true;
-            response.Message = ReplyMessage.MESSAGE_QUERY;
-            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
-        }
-        return response;
-    }
-
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> SearchGamesByTitleAsync(
-        string name
-    )
-    {
-        var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        IEnumerable<Game> games = await _unitOfWork.Game.GetNameQuery(name);
-        if (games is null)
-        {
-            response.IsSuccess = false;
-            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
-        }
-        else
-        {
-            response.IsSuccess = true;
-            response.Message = ReplyMessage.MESSAGE_QUERY;
-            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
-        }
-        return response;
-    }
-
     public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> FilterGamesAsync(
-        GameFilterProductDto filterProductDto
+        FilterRequestDto filterProductDto
     )
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        IEnumerable<Game> games = await _unitOfWork.Game.Filter(filterProductDto);
+        var filter = _mapper.Map<GameFilterProductDto>(filterProductDto);
+        IEnumerable<Game> games = await _unitOfWork.Game.FilterGameAsync(filter);
         if (games is not null)
         {
             response.IsSuccess = true;

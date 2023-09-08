@@ -11,3 +11,8 @@ GET http://localhost:5099/api/game/search
     ?query=metal
 
 Content-Type: application/json
+
+
+### By Id
+GET http://localhost:5099/api/game/2
+Content-Type: application/json

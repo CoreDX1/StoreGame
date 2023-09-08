@@ -14,29 +14,29 @@ public class GenericRepository<TEntity> : IGenericRespository<TEntity>
         _entity = _db.Set<TEntity>();
     }
 
-    public Task<bool> Add(TEntity entity)
+    public Task<bool> AddAsync(TEntity entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> Delete(TEntity entity)
+    public Task<bool> RemoveAsync(TEntity entity)
     {
         throw new NotImplementedException();
     }
 
-    public virtual async Task<IEnumerable<TEntity>> GetAll()
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
         var getAll = await _entity.ToListAsync();
         return getAll;
     }
 
-    public virtual async Task<TEntity> GetById(int id)
+    public virtual async Task<TEntity> GetByIdAsync(int id)
     {
         var getById = await _entity.FindAsync(id);
         return getById!;
     }
 
-    public Task<bool> Update(TEntity entity)
+    public Task<bool> EditAsync(TEntity entity)
     {
         throw new NotImplementedException();
     }

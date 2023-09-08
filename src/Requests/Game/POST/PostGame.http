@@ -18,6 +18,5 @@ Content-Type: application/json
 {
     "order" : "desc",
     "title": "s.t.a.l.k.",
-    "priceMin": 0,
-    "priceMax": 10000
+    "priceMax": 5000
 }

@@ -8,8 +8,8 @@ public class GameTypeResponseDto
     public DateOnly? ReleaseDate { get; set; }
     public decimal Price { get; set; }
     public int Stock { get; set; }
-    public string? Imagen { get; set; }
-    public string? DeveloperName { get; set; }
-    public string? PlatformName { get; set; }
+    public string? Image { get; set; }
+    public string? Developer { get; set; }
+    public string? Platform { get; set; }
     public string? Website { get; set; }
 }
