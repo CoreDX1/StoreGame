@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Store.Domain.Entities;
+﻿namespace Store.Domain.Entities;
 
 public partial class Developer
 {
