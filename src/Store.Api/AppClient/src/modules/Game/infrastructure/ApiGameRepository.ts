@@ -7,7 +7,7 @@ class CreateApiRespository implements GameRepository {
     private GAME_URL: string = `${API_URL}/game`;
 
     public getId = async (id: number): Promise<BaseResponse<GameResponse>> => {
-        const response = await fetch(`${this.GAME_URL}/search/${id}`);
+        const response = await fetch(`${this.GAME_URL}/${id}`);
         const game = await response.json();
         return game;
     };
