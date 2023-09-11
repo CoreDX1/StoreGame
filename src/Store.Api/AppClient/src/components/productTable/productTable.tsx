@@ -37,7 +37,7 @@ export default component$<Props>(({ gameJson, onSelectGame, order }) => {
                             <tr key={item.id} class="text-start">
                                 <td class="py-2 px-4">
                                     <div class="flex items-center gap-3">
-                                        <img src={`/Imagen/${item.imagen}`} width="100" height="50" alt="" />{" "}
+                                        <img src={`/Imagen/${item.image}`} width="100" height="50" alt="" />{" "}
                                         {item.title}
                                     </div>
                                 </td>

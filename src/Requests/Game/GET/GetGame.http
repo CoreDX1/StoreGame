@@ -3,7 +3,7 @@
 @host = {{hostname}}:{{port}}
 
 ### List
-GET http://{{host}}/api/game/List 
+GET http://{{host}}/api/game/list 
 Content-Type: application/json
 
 ### Search Name

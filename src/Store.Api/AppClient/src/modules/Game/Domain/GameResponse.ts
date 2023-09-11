@@ -8,6 +8,6 @@ export interface GameResponse {
     description: string;
     price: number;
     stock: number;
-    imagen: string;
+    image: string;
     website: string;
 }

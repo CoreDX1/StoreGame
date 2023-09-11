@@ -112,4 +112,12 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         var result = await game.ToListAsync();
         return result.Count > 0 ? result : null!;
     }
+
+    public async Task<IEnumerable<Game>> GetTitleQuery(string name)
+    {
+        IQueryable<Game> game = _dbContext.Games.Where(
+            t => t.Title.ToLower().Contains(name.ToLower())
+        );
+        return await game.ToListAsync();
+    }
 }

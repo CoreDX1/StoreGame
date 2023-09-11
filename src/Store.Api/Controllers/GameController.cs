@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using Store.Application.DTO.Game.Request;
 using Store.Application.Interface;
-using Store.Infrastructure.Commons.Request;
 
 namespace Store.Api.Controllers;
 
@@ -41,6 +41,14 @@ public class GameController : ControllerBase
     public async Task<IActionResult> FilterGame([FromBody] FilterRequestDto filterProductDto)
     {
         var response = await _gameApplication.FilterGamesAsync(filterProductDto);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("search")]
+    public async Task<IActionResult> SearchTitle([FromQuery] string query)
+    {
+        var response = await _gameApplication.GetTitleQuery(query);
         return Ok(response);
     }
 }

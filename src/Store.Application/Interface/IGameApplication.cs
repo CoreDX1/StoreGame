@@ -15,4 +15,6 @@ public interface IGameApplication
     Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> FilterGamesAsync(
         FilterRequestDto filterProductDto
     );
+
+    Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name);
 }

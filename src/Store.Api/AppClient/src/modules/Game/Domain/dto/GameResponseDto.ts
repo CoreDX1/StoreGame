@@ -1,3 +1,3 @@
 import { type GameResponse } from "../GameResponse";
 
-export type GameResponseDto = Pick<GameResponse, "imagen" | "title" | "website" | "price" | "id">;
+export type GameResponseDto = Pick<GameResponse, "image" | "title" | "website" | "price" | "id">;
