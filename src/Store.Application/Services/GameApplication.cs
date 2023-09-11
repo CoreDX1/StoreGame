@@ -100,4 +100,30 @@ public class GameApplication : IGameApplication
         }
         return response;
     }
+
+    public async Task<BaseResponse<bool>> EditGameAsync(int gameId, EditRequestDto data)
+    {
+        var response = new BaseResponse<bool>();
+        var gameById = await GameByIdAsync(gameId);
+        if (gameById.Data is null)
+        {
+            response.IsSuccess = false;
+            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
+            return response;
+        }
+        var game = _mapper.Map<Game>(data);
+        game.GameId = gameId;
+        response.Data = await _unitOfWork.Game.EditGameAsync(game);
+        if (!response.Data)
+        {
+            response.IsSuccess = false;
+            response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
+        }
+        else
+        {
+            response.IsSuccess = true;
+            response.Message = ReplyMessage.MESSAGE_QUERY;
+        }
+        return response;
+    }
 }

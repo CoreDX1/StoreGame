@@ -14,5 +14,5 @@ Content-Type: application/json
 
 
 ### By Id
-GET http://localhost:5099/api/game/2
+GET http://localhost:5099/api/game/5
 Content-Type: application/json

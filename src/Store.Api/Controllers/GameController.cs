@@ -51,4 +51,12 @@ public class GameController : ControllerBase
         var response = await _gameApplication.GetTitleQuery(query);
         return Ok(response);
     }
+
+    [HttpPut]
+    [Route("edit")]
+    public async Task<IActionResult> EditGame(int gameId, [FromBody] EditRequestDto data)
+    {
+        var response = await _gameApplication.EditGameAsync(gameId, data);
+        return Ok(response);
+    }
 }

@@ -19,5 +19,6 @@ public class GameMappingsProfile : Profile
 
         CreateMap<OrderRequestDto, BasePaginationOrderRequest>();
         CreateMap<FilterRequestDto, GameFilterProductDto>();
+        CreateMap<EditRequestDto, Game>();
     }
 }

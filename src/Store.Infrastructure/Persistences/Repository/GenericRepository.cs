@@ -36,8 +36,10 @@ public class GenericRepository<TEntity> : IGenericRespository<TEntity>
         return getById!;
     }
 
-    public Task<bool> EditAsync(TEntity entity)
+    public async Task<bool> EditAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        _entity.Update(entity);
+        var record = await _db.SaveChangesAsync();
+        return record > 0;
     }
 }

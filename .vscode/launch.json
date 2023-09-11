@@ -11,7 +11,7 @@
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
             "program": "${workspaceFolder}/src/Store.Api/bin/Debug/net7.0/Store.Api.dll",
-            "console": "externalTerminal",
+            "console": "integratedTerminal",
             "args": [],
             "cwd": "${workspaceFolder}/src/Store.Api",
             "stopAtEntry": false,

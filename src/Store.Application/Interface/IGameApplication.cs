@@ -1,7 +1,6 @@
 ﻿using Store.Application.Commons.Bases;
 using Store.Application.DTO.Game.Request;
 using Store.Application.DTO.Game.Response;
-using Store.Infrastructure.Commons.Request;
 
 namespace Store.Application.Interface;
 
@@ -17,4 +16,5 @@ public interface IGameApplication
     );
 
     Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name);
+    Task<BaseResponse<bool>> EditGameAsync(int gameId, EditRequestDto data);
 }
