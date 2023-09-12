@@ -15,7 +15,7 @@ public partial class Game
     public int Stock { get; set; }
     public string? Imagen { get; set; }
     public virtual ICollection<Cart> Carts { get; } = new List<Cart>();
-    public virtual Developer? Developer { get; set; }
+    public virtual Developer Developer { get; set; } = new Developer();
     public virtual Platform? Platform { get; set; }
     public virtual ICollection<Transaction> Transactions { get; } = new List<Transaction>();
     public virtual ICollection<Genre> Genres { get; } = new List<Genre>();

@@ -25,7 +25,7 @@ public class GameApplication : IGameApplication
     public async Task<BaseResponse<GameTypeResponseDto>> GameByIdAsync(int id)
     {
         var response = new BaseResponse<GameTypeResponseDto>();
-        Game game = await _unitOfWork.Game.GetByIdAsync(id);
+        var game = await _unitOfWork.Game.GetByIdAsync(id);
 
         if (game is null)
         {
@@ -67,7 +67,8 @@ public class GameApplication : IGameApplication
     {
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
         var filter = _mapper.Map<GameFilterProductDto>(filterProductDto);
-        IEnumerable<Game> games = await _unitOfWork.Game.FilterGameAsync(filter);
+        var games = await _unitOfWork.Game.FilterGameAsync(filter);
+
         if (games is not null)
         {
             response.IsSuccess = true;
@@ -79,13 +80,14 @@ public class GameApplication : IGameApplication
             response.IsSuccess = false;
             response.Message = "No se encontraron juegos";
         }
+
         return response;
     }
 
-    public async Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GetTitleQuery(string name)
+    public async Task<BaseResponse<IEnumerable<GameSearchReponseDto>>> GetTitleQuery(string name)
     {
-        var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
-        IEnumerable<Game> games = await _unitOfWork.Game.GetNameQuery(name);
+        var response = new BaseResponse<IEnumerable<GameSearchReponseDto>>();
+        var games = await _unitOfWork.Game.GetNameQuery(name);
         if (games is null)
         {
             response.IsSuccess = false;
@@ -96,7 +98,7 @@ public class GameApplication : IGameApplication
         {
             response.IsSuccess = true;
             response.Message = "Juegos encontrados";
-            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+            response.Data = _mapper.Map<IEnumerable<GameSearchReponseDto>>(games);
         }
         return response;
     }

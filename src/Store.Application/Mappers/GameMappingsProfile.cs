@@ -20,5 +20,7 @@ public class GameMappingsProfile : Profile
         CreateMap<OrderRequestDto, BasePaginationOrderRequest>();
         CreateMap<FilterRequestDto, GameFilterProductDto>();
         CreateMap<EditRequestDto, Game>();
+        CreateMap<Game, GameSearchReponseDto>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.GameId));
     }
 }

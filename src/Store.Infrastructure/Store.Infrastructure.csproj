@@ -6,6 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Commons\Response\" />
     <Folder Include="Persistences\Repository\Interfaces\" />
   </ItemGroup>
 

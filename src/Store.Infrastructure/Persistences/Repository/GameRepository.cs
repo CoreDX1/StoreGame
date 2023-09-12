@@ -18,22 +18,24 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
     private IQueryable<Game> BaseGameQuery() =>
         _dbContext.Games.Include(g => g.Platform).Include(g => g.Developer);
 
-    public async Task<IEnumerable<Game>> GetNameQuery(string name)
+    public async Task<IEnumerable<Game>?> GetNameQuery(string name)
     {
-        var query = BaseGameQuery();
-        var games = query.Where(x => x.Title.ToLower().Contains(name.ToLower()));
+        var game = _dbContext.Games
+            .AsNoTracking()
+            .Where(t => t.Title.ToLower().Contains(name.ToLower()))
+            .Select(g => new Game { GameId = g.GameId, Title = g.Title });
 
-        if (games.Count() == 0)
+        if (game.Count() == 0)
         {
-            return null!;
+            return null;
         }
 
-        return await games.ToListAsync();
+        return await game.ToListAsync();
     }
 
-    public async Task<IEnumerable<Game>> FilterGameAsync(GameFilterProductDto filterProductDto)
+    public async Task<IEnumerable<Game>?> FilterGameAsync(GameFilterProductDto filterProductDto)
     {
-        var game = BaseGameQuery();
+        var game = BaseGameQuery().AsNoTracking();
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Title))
         {
@@ -73,7 +75,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Developer))
         {
-            game = game.Where(name => name.Developer!.Name == filterProductDto.Developer);
+            game = game.Where(name => name.Developer.Name == filterProductDto.Developer);
         }
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Platform))
@@ -82,21 +84,14 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         }
 
         var result = await game.ToListAsync();
-        return result.Count > 0 ? result : null!;
+        return result.Count > 0 ? result : null;
     }
 
-    public async Task<IEnumerable<Game>> GetTitleQuery(string name)
+    public override async Task<Game?> GetByIdAsync(int id)
     {
-        IQueryable<Game> game = _dbContext.Games.Where(
-            t => t.Title.ToLower().Contains(name.ToLower())
-        );
-        return await game.ToListAsync();
-    }
+        var game = await BaseGameQuery().AsNoTracking().FirstOrDefaultAsync(x => x.GameId == id);
 
-    public override async Task<Game> GetByIdAsync(int id)
-    {
-        var game = await BaseGameQuery().FirstOrDefaultAsync(x => x.GameId == id);
-        return game!;
+        return game;
     }
 
     public async Task<IEnumerable<Game>> GetGemesQuery()
