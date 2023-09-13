@@ -7,7 +7,7 @@ public class GameFilterProductDto
     public string Title { get; set; } = string.Empty;
     public DateTime? RealeaseDateBefore { get; set; }
     public DateTime? RealeaseDateAfter { get; set; }
-    public decimal? PriceMin { get; set; }
+    public decimal PriceMin { get; set; } = 0;
     public decimal? PriceMax { get; set; }
     public string Developer { get; set; } = string.Empty;
     public string Platform { get; set; } = string.Empty;

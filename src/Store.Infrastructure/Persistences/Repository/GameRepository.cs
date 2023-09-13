@@ -25,12 +25,9 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             .Where(t => t.Title.ToLower().Contains(name.ToLower()))
             .Select(g => new Game { GameId = g.GameId, Title = g.Title });
 
-        if (game.Count() == 0)
-        {
-            return null;
-        }
+        var matchingGames = await game.ToListAsync();
 
-        return await game.ToListAsync();
+        return matchingGames.Any() ? matchingGames : null;
     }
 
     public async Task<IEnumerable<Game>?> FilterGameAsync(GameFilterProductDto filterProductDto)
@@ -38,9 +35,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         var game = BaseGameQuery().AsNoTracking();
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Title))
-        {
             game = game.Where(x => x.Title.ToLower().Contains(filterProductDto.Title.ToLower()));
-        }
 
         if (filterProductDto.Records)
             game = game.OrderBy(x => x.Title);
@@ -64,33 +59,28 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             );
         }
 
-        if (filterProductDto.PriceMax != null && filterProductDto.PriceMin != null)
-        {
+        if (filterProductDto.PriceMax != null)
             game = game.Where(
                 product =>
                     product.Price >= filterProductDto.PriceMin
                     && product.Price <= filterProductDto.PriceMax
             );
-        }
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Developer))
-        {
             game = game.Where(name => name.Developer.Name == filterProductDto.Developer);
-        }
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Platform))
-        {
             game = game.Where(name => name.Title == filterProductDto.Platform);
-        }
 
-        var result = await game.ToListAsync();
-        return result.Count > 0 ? result : null;
+        // var result = await game.ToListAsync();
+        // return result.Count > 0 ? result : null;
+        var matchingGames = await game.ToListAsync();
+        return matchingGames.Any() ? matchingGames : null;
     }
 
     public override async Task<Game?> GetByIdAsync(int id)
     {
         var game = await BaseGameQuery().AsNoTracking().FirstOrDefaultAsync(x => x.GameId == id);
-
         return game;
     }
 
