@@ -13,6 +13,7 @@ namespace Store.Application.Services;
 
 public class GameApplication : IGameApplication
 {
+    // Declaracion de dos campos privabados de una clase
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
