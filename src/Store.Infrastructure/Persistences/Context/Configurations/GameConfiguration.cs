@@ -11,17 +11,17 @@ class GameConfiguration : IEntityTypeConfiguration<Game>
     {
         builder.HasKey(e => e.GameId).HasName("game_pkey");
 
-        builder.ToTable("game");
+        builder.ToTable("Games");
 
-        builder.Property(e => e.GameId).HasColumnName("game_id");
-        builder.Property(e => e.Description).HasMaxLength(500).HasColumnName("description");
-        builder.Property(e => e.DeveloperId).HasColumnName("developer_id");
-        builder.Property(e => e.Imagen).HasMaxLength(255).HasColumnName("imagen");
-        builder.Property(e => e.PlatformId).HasColumnName("platform_id");
-        builder.Property(e => e.Price).HasPrecision(10, 2).HasColumnName("price");
-        builder.Property(e => e.ReleaseDate).HasColumnName("release_date");
-        builder.Property(e => e.Stock).HasColumnName("stock");
-        builder.Property(e => e.Title).HasMaxLength(100).HasColumnName("title");
+        builder.Property(e => e.GameId).HasColumnName("GameId");
+        builder.Property(e => e.Description).HasMaxLength(500).HasColumnName("Description");
+        builder.Property(e => e.DeveloperId).HasColumnName("DeveloperId");
+        builder.Property(e => e.Imagen).HasMaxLength(255).HasColumnName("Imagen");
+        builder.Property(e => e.PlatformId).HasColumnName("PlatformId");
+        builder.Property(e => e.Price).HasPrecision(10, 2).HasColumnName("Price");
+        builder.Property(e => e.ReleaseDate).HasColumnName("ReleaseDate");
+        builder.Property(e => e.Stock).HasColumnName("Stock");
+        builder.Property(e => e.Title).HasMaxLength(100).HasColumnName("Title");
 
         builder
             .HasOne(d => d.Developer)

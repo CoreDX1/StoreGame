@@ -11,6 +11,16 @@ public partial class StoregameContext : DbContext
     public StoregameContext(DbContextOptions<StoregameContext> options)
         : base(options) { }
 
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     if (!optionsBuilder.IsConfigured)
+    //     {
+    //         optionsBuilder.UseNpgsql(
+    //             "Server=localhost;Port=8080;Database=storegame;User Id=core;Password=index"
+    //         );
+    //     }
+    // }
+
     public virtual DbSet<Cart> Carts { get; set; }
 
     public virtual DbSet<Customer> Customers { get; set; }

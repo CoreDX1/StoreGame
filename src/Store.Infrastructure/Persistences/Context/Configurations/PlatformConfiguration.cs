@@ -10,9 +10,9 @@ public class PlatformConfiguration : IEntityTypeConfiguration<Platform>
     {
         builder.HasKey(e => e.PlatformId).HasName("platform_pkey");
 
-        builder.ToTable("platform");
+        builder.ToTable("Platforms");
 
-        builder.Property(e => e.PlatformId).HasColumnName("platform_id");
-        builder.Property(e => e.Name).HasMaxLength(50).HasColumnName("name");
+        builder.Property(e => e.PlatformId).HasColumnName("PlatformId");
+        builder.Property(e => e.Name).HasMaxLength(50).HasColumnName("Name");
     }
 }

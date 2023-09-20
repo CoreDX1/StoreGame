@@ -10,10 +10,10 @@ public class DeveloperConfiguration : IEntityTypeConfiguration<Developer>
     {
         builder.HasKey(e => e.DeveloperId).HasName("developer_pkey");
 
-        builder.ToTable("developer");
+        builder.ToTable("Developers");
 
-        builder.Property(e => e.DeveloperId).HasColumnName("developer_id");
-        builder.Property(e => e.Name).HasMaxLength(50).HasColumnName("name");
-        builder.Property(e => e.Website).HasMaxLength(100).HasColumnName("website");
+        builder.Property(e => e.DeveloperId).HasColumnName("DeveloperId");
+        builder.Property(e => e.Name).HasMaxLength(50).HasColumnName("Name");
+        builder.Property(e => e.Website).HasMaxLength(100).HasColumnName("Website");
     }
 }
