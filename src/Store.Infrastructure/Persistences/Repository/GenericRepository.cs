@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Store.Infrastructure.Persistences.Context;
 
 namespace Store.Infrastructure.Persistences.Repository;
 

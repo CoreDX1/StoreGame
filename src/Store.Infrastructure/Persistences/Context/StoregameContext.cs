@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Store.Domain.Entities;
 
-namespace Store.Infrastructure;
+namespace Store.Infrastructure.Persistences.Context;
 
 public partial class StoregameContext : DbContext
 {
