@@ -1,5 +1,5 @@
 import { Slot, component$ } from "@builder.io/qwik";
-import Dashboard from "~/components/Dashboard/Dashboard";
+import Dashboard from "~/components/dashboard/dashboard";
 
 export default component$(() => {
     return (

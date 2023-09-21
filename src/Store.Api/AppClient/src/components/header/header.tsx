@@ -1,7 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import NavLink from "../NavLink/NavLink";
-import Search from "../Search/Search";
-
+import Search from "../search/search";
 export default component$(() => {
     return (
         <header class="pt-2  w-[930px] mx-auto">

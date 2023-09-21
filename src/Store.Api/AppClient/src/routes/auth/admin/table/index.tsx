@@ -2,11 +2,11 @@ import { component$, useSignal, useTask$, $, useVisibleTask$, useResource$, useS
 import { type GameResponse } from "~/modules/Game/Domain/GameResponse";
 import { ApiGameRepository } from "~/modules/Game/infrastructure/ApiGameRepository";
 import { type BaseResponse } from "~/modules/types/BaseResponse";
-import EditGameWindow from "~/components/EditGameWindow/EditGameWindow";
-import ProductTable from "~/components/ProductTable/ProductTable";
 import { HiBars3Solid } from "@qwikest/icons/heroicons";
-import { type GameResource } from "~/components/Search/Search";
 import { type Order, getGameNameOrder } from "~/modules/Game/application/get/getGameNameOrder";
+import ProductTable from "~/components/productTable/productTable";
+import EditGameWindow from "~/components/editGameWindow/editGameWindow";
+import { type GameResource } from "~/components/search/search";
 
 export default component$(() => {
     const gameData = useSignal<BaseResponse<GameResponse[]>>();
