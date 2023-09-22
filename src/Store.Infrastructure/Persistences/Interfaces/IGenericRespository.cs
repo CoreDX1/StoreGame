@@ -1,4 +1,4 @@
-﻿namespace Store.Infrastructure;
+﻿namespace Store.Infrastructure.Persistences.Interfaces;
 
 public interface IGenericRespository<TEntity>
     where TEntity : class

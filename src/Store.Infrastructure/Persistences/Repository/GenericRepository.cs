@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Infrastructure.Persistences.Context;
+using Store.Infrastructure.Persistences.Interfaces;
 
 namespace Store.Infrastructure.Persistences.Repository;
 

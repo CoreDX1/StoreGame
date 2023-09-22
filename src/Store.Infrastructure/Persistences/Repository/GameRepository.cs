@@ -71,7 +71,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             game = game.Where(name => name.Developer.Name == filterProductDto.Developer);
 
         if (!string.IsNullOrWhiteSpace(filterProductDto.Platform))
-            game = game.Where(name => name.Title == filterProductDto.Platform);
+            game = game.Where(g => g.Title == filterProductDto.Platform);
 
         // var result = await game.ToListAsync();
         // return result.Count > 0 ? result : null;
