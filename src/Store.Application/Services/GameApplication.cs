@@ -59,6 +59,7 @@ public class GameApplication : IGameApplication
             response.Message = ReplyMessage.MESSAGE_QUERY;
             response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
         }
+
         return response;
     }
 
@@ -89,6 +90,7 @@ public class GameApplication : IGameApplication
     {
         var response = new BaseResponse<IEnumerable<GameSearchReponseDto>>();
         var games = await _unitOfWork.Game.GetNameQuery(name);
+
         if (games is null)
         {
             response.IsSuccess = false;
@@ -101,6 +103,7 @@ public class GameApplication : IGameApplication
             response.Message = "Juegos encontrados";
             response.Data = _mapper.Map<IEnumerable<GameSearchReponseDto>>(games);
         }
+
         return response;
     }
 
@@ -108,15 +111,18 @@ public class GameApplication : IGameApplication
     {
         var response = new BaseResponse<bool>();
         var gameById = await GameByIdAsync(gameId);
+
         if (gameById.Data is null)
         {
             response.IsSuccess = false;
             response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
             return response;
         }
+
         var game = _mapper.Map<Game>(data);
         game.GameId = gameId;
         response.Data = await _unitOfWork.Game.EditGameAsync(game);
+
         if (!response.Data)
         {
             response.IsSuccess = false;
@@ -127,6 +133,7 @@ public class GameApplication : IGameApplication
             response.IsSuccess = true;
             response.Message = ReplyMessage.MESSAGE_QUERY;
         }
+
         return response;
     }
 }
