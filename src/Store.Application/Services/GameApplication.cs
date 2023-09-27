@@ -26,7 +26,8 @@ public class GameApplication : IGameApplication
     public async Task<BaseResponse<GameTypeResponseDto>> GameByIdAsync(int id)
     {
         var response = new BaseResponse<GameTypeResponseDto>();
-        var game = await _unitOfWork.Game.GetByIdAsync(id);
+
+        Game? game = await _unitOfWork.Game.GetByIdAsync(id);
 
         if (game is null)
         {
@@ -48,7 +49,7 @@ public class GameApplication : IGameApplication
         var response = new BaseResponse<IEnumerable<GameTypeResponseDto>>();
         IEnumerable<Game> games = await _unitOfWork.Game.GetGemesQuery();
 
-        if (games is null)
+        if (games == Enumerable.Empty<Game>())
         {
             response.IsSuccess = false;
             response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
@@ -71,7 +72,7 @@ public class GameApplication : IGameApplication
         var filter = _mapper.Map<GameFilterProductDto>(filterProductDto);
         var games = await _unitOfWork.Game.FilterGameAsync(filter);
 
-        if (games is not null)
+        if (games == Enumerable.Empty<Game>())
         {
             response.IsSuccess = true;
             response.Message = ReplyMessage.MESSAGE_QUERY;
@@ -91,18 +92,16 @@ public class GameApplication : IGameApplication
         var response = new BaseResponse<IEnumerable<GameSearchReponseDto>>();
         var games = await _unitOfWork.Game.GetNameQuery(name);
 
-        if (games is null)
+        if (games == Enumerable.Empty<Game>())
         {
             response.IsSuccess = false;
             response.Message = "No se encontraron juegos";
             return response;
         }
-        else
-        {
-            response.IsSuccess = true;
-            response.Message = "Juegos encontrados";
-            response.Data = _mapper.Map<IEnumerable<GameSearchReponseDto>>(games);
-        }
+
+        response.IsSuccess = true;
+        response.Message = "Juegos encontrados";
+        response.Data = _mapper.Map<IEnumerable<GameSearchReponseDto>>(games);
 
         return response;
     }
@@ -112,7 +111,7 @@ public class GameApplication : IGameApplication
         var response = new BaseResponse<bool>();
         var gameById = await GameByIdAsync(gameId);
 
-        if (gameById.Data is null)
+        if (gameById.Data == Enumerable.Empty<Game>())
         {
             response.IsSuccess = false;
             response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;

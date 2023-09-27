@@ -26,9 +26,12 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
             .Where(t => t.Title.ToLower().Contains(name.ToLower()))
             .Select(g => new Game { GameId = g.GameId, Title = g.Title });
 
-        var matchingGames = await game.ToListAsync();
+        var gameList = await game.ToListAsync();
 
-        return matchingGames.Any() ? matchingGames : null;
+        if (!gameList.Any())
+            return Enumerable.Empty<Game>();
+
+        return gameList;
     }
 
     public async Task<IEnumerable<Game>?> FilterGameAsync(GameFilterProductDto filterProductDto)
@@ -73,10 +76,12 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         if (!string.IsNullOrWhiteSpace(filterProductDto.Platform))
             game = game.Where(g => g.Title == filterProductDto.Platform);
 
-        // var result = await game.ToListAsync();
-        // return result.Count > 0 ? result : null;
-        var matchingGames = await game.ToListAsync();
-        return matchingGames.Any() ? matchingGames : null;
+        var gameList = await game.ToListAsync();
+
+        if (!gameList.Any())
+            return Enumerable.Empty<Game>();
+
+        return game;
     }
 
     public override async Task<Game?> GetByIdAsync(int id)
@@ -88,7 +93,12 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
     public async Task<IEnumerable<Game>> GetGemesQuery()
     {
         var query = BaseGameQuery().OrderBy(x => x.GameId);
-        return await query.ToListAsync();
+        var gamesList = await query.ToListAsync();
+
+        if (!gamesList.Any())
+            return Enumerable.Empty<Game>();
+
+        return query;
     }
 
     public async Task<bool> EditGameAsync(Game data)
