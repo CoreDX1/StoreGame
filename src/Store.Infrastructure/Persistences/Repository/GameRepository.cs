@@ -103,10 +103,21 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
 
     public async Task<bool> EditGameAsync(Game data)
     {
-        var game = await GetByIdAsync(data.GameId);
-        game!.Title = data.Title;
-        game.Price = data.Price;
-        _dbContext.Update(game);
+        Game? game = await GetByIdAsync(data.GameId);
+
+        if (game == null)
+            return false;
+
+        var editGame = new Game
+        {
+            GameId = game!.GameId,
+            Title = data.Title,
+            Price = data.Price
+        };
+
+        var entry = _dbContext.Entry(game);
+        entry.CurrentValues.SetValues(editGame);
+
         var result = await _dbContext.SaveChangesAsync();
         return result > 0;
     }

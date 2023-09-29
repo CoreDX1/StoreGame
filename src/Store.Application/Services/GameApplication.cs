@@ -29,7 +29,7 @@ public class GameApplication : IGameApplication
 
         Game? game = await _unitOfWork.Game.GetByIdAsync(id);
 
-        if (game is null)
+        if (game == null)
         {
             response.IsSuccess = false;
             response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
@@ -74,14 +74,14 @@ public class GameApplication : IGameApplication
 
         if (games == Enumerable.Empty<Game>())
         {
-            response.IsSuccess = true;
-            response.Message = ReplyMessage.MESSAGE_QUERY;
-            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
+            response.IsSuccess = false;
+            response.Message = "No se encontraron juegos";
         }
         else
         {
-            response.IsSuccess = false;
-            response.Message = "No se encontraron juegos";
+            response.IsSuccess = true;
+            response.Message = ReplyMessage.MESSAGE_QUERY;
+            response.Data = _mapper.Map<IEnumerable<GameTypeResponseDto>>(games);
         }
 
         return response;

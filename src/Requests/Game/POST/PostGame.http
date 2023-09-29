@@ -16,7 +16,6 @@ POST http://localhost:5099/api/Game/filter
 Content-Type: application/json
 
 {
-    "title": "s.t.",
-    "priceMin": 1500,
-    "priceMax": 10000
+    "title": "dark souls",
+    "priceMax": 6000
 }
