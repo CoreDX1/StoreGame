@@ -84,10 +84,10 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         return game;
     }
 
-    public override async Task<Game?> GetByIdAsync(int id)
+    public override async Task<Game> GetByIdAsync(int id)
     {
         var game = await BaseGameQuery().AsNoTracking().FirstOrDefaultAsync(x => x.GameId == id);
-        return game;
+        return game!;
     }
 
     public async Task<IEnumerable<Game>> GetGemesQuery()

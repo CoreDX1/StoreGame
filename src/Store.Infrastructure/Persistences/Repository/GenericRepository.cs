@@ -32,7 +32,7 @@ public class GenericRepository<TEntity> : IGenericRespository<TEntity>
         return getAll;
     }
 
-    public virtual async Task<TEntity?> GetByIdAsync(int id)
+    public virtual async Task<TEntity> GetByIdAsync(int id)
     {
         var getById = await _entity.FindAsync(id);
         return getById!;
