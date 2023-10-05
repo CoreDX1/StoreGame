@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using Store.Application.DTO.Game.Request;
+using Store.Application.DTO.Game.Response;
 using Store.Application.Interface;
 
 namespace Store.Api.Controllers;
@@ -21,39 +22,39 @@ public class GameController : ControllerBase
     /// </summary>
     /// <returns>Una accion de que devuelve la lista de juegos</returns>
     [HttpGet]
-    [Route("list")]
+    [ProducesResponseType(typeof(IEnumerable<GameTypeResponseDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GameList()
     {
         var response = await _gameApplication.GameListAsync();
         return Ok(response);
     }
 
-    [HttpGet]
-    [Route("{id:int}")]
+    [HttpGet("{id:int}")]
+    [ProducesResponseType(typeof(GameTypeResponseDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         var response = await _gameApplication.GameByIdAsync(id);
         return Ok(response);
     }
 
-    [HttpPost]
-    [Route("filter")]
+    [HttpPost("filter")]
+    [ProducesResponseType(typeof(IEnumerable<GameTypeResponseDto>), StatusCodes.Status200OK)]
     public async Task<IActionResult> FilterGame([FromBody] FilterRequestDto filterProductDto)
     {
         var response = await _gameApplication.FilterGamesAsync(filterProductDto);
         return Ok(response);
     }
 
-    [HttpGet]
-    [Route("search")]
+    [HttpGet("search")]
+    [ProducesResponseType(typeof(IEnumerable<GameTypeResponseDto>), StatusCodes.Status200OK),]
     public async Task<IActionResult> SearchTitle([FromQuery] string query)
     {
         var response = await _gameApplication.GetTitleQuery(query);
         return Ok(response);
     }
 
-    [HttpPut]
-    [Route("edit")]
+    [HttpPut("edit")]
+    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
     public async Task<IActionResult> EditGame(int gameId, [FromBody] EditRequestDto data)
     {
         var response = await _gameApplication.EditGameAsync(gameId, data);

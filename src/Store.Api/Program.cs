@@ -4,7 +4,6 @@ using Store.Application.Extension;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 var Configuration = builder.Configuration;
 var Cors = "Cors";
 builder.Services.AddInjectionInfrastructure(Configuration);
