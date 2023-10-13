@@ -27,3 +27,4 @@ ASP.Net Core 2.2 Restful WebAPI starter template created with vertical slices
  ### Web
 
  ![Web](imagen/WebSite.png)
+ ![Dashboard](imagen/Dashboard.png)
