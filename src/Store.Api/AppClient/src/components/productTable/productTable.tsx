@@ -1,6 +1,6 @@
 import { component$, Resource } from "@builder.io/qwik";
 import { MoArrowDown, MoEditAlt } from "@qwikest/icons/monoicons";
-import { type GameResource } from "../Search/Search";
+import { type GameResource } from "../search/search";
 
 interface Props {
     gameJson: Promise<GameResource>;
