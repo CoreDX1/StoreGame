@@ -14,3 +14,12 @@ ASP.Net Core 2.2 Restful WebAPI starter template created with vertical slices
          <h2>Flow</h2>
 <img src="https://i.ibb.co/DzQbYpc/vsa.png">
  </div>
+
+ ### Backend
+ * ASP.NET CORE
+ * Entity Framework (code first)
+ * Dotnet Ef
+
+ ### API
+
+ ![All Apis](imagen/2023-10-13_15-15.png)
