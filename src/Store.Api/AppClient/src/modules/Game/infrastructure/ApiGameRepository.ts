@@ -13,7 +13,7 @@ class CreateApiRespository implements GameRepository {
     };
 
     public getAll = async (): Promise<BaseResponse<GameResponse[]>> => {
-        const response = await fetch(`${this.GAME_URL}/list`);
+        const response = await fetch(`${this.GAME_URL}`);
         const game = await response.json();
         return game;
     };
