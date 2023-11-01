@@ -10,11 +10,14 @@ public interface IGameApplication
     /// Gets a list of games.
     /// </summary>
     Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> GameListAsync();
+
     Task<BaseResponse<GameTypeResponseDto>> GameByIdAsync(int id);
+
     Task<BaseResponse<IEnumerable<GameTypeResponseDto>>> FilterGamesAsync(
         FilterRequestDto filterProductDto
     );
 
     Task<BaseResponse<IEnumerable<GameSearchReponseDto>>> GetTitleQuery(string name);
+
     Task<BaseResponse<bool>> EditGameAsync(int gameId, EditRequestDto data);
 }

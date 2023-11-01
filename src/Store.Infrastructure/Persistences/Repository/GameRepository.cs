@@ -19,7 +19,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
     private IQueryable<Game> BaseGameQuery() =>
         _dbContext.Games.Include(g => g.Platform).Include(g => g.Developer);
 
-    public async Task<IEnumerable<Game>?> GetNameQuery(string name)
+    public async Task<IEnumerable<Game>> GetNameQuery(string name)
     {
         var game = _dbContext.Games
             .AsNoTracking()
@@ -34,7 +34,7 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
         return gameList;
     }
 
-    public async Task<IEnumerable<Game>?> FilterGameAsync(GameFilterProductDto filterProductDto)
+    public async Task<IEnumerable<Game>> FilterGameAsync(GameFilterProductDto filterProductDto)
     {
         var game = BaseGameQuery().AsNoTracking();
 
