@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-
 using Store.Application.Commons.Bases;
 using Store.Application.DTO.Game.Request;
 using Store.Application.DTO.Game.Response;
@@ -29,7 +28,7 @@ public class GameApplication : IGameApplication
 
         Game? game = await _unitOfWork.Game.GetByIdAsync(id);
 
-        if (game == null)
+        if (game == Enumerable.Empty<Game>())
         {
             response.IsSuccess = false;
             response.Message = ReplyMessage.MESSAGE_QUERY_EMPTY;
