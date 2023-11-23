@@ -29,6 +29,10 @@ public class GameController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Llama a la tabla Game por Id
+    /// </summary>
+    /// <returns>Una accion de que devuelve el juego por Id</returns>
     [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(GameTypeResponseDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetById([FromRoute] int id)
