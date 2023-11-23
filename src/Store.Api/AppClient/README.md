@@ -1,65 +1,27 @@
-# Qwik City App ⚡️
+# AppClient
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
 
----
+## Development server
 
-## Project Structure
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+## Code scaffolding
 
-Inside your project, you'll see the following directory structure:
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
+## Build
 
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.builder.io/qwikcity/routing/overview/) for more info.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-- `src/components`: Recommended directory for components.
+## Running unit tests
 
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Add Integrations and deployment
+## Running end-to-end tests
 
-Use the `npm run qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.builder.io/qwikcity/guides/static-site-generation/).
+Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-```shell
-npm run qwik add # or `yarn qwik add`
-```
+## Further help
 
-## Development
-
-Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
-
-```shell
-npm start # or `yarn start`
-```
-
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
-
-## Preview
-
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
-
-```shell
-npm run preview # or `yarn preview`
-```
-
-## Production
-
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
-
-```shell
-npm run build # or `yarn build`
-```
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
